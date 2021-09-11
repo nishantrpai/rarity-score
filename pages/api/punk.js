@@ -7,25 +7,63 @@ const get_all_traits = () => {
     let punk = punks[i];
     let { attributes } = punk;
     for (let j = 0; j < attributes.length; j++) {
-      let attribute = attributes[j]['value']
-      if (attribute in all_traits) {
-        all_traits[attribute]++;
-      } else {
-        all_traits[attribute] = 1;
+      let attribute = attributes[j];
+      if (attribute) {
+        let { trait_type, value } = attribute;
+        if (trait_type in all_traits) {
+          // trait = type,gender, beard
+          if (value in all_traits[trait_type]) {
+            all_traits[trait_type][value]++;
+          } else {
+            all_traits[trait_type][value] = 1;
+          }
+        } else {
+          all_traits[trait_type] = { [value]: 1 }
+        }
+
       }
     }
   }
+  console.log(all_traits);
   return all_traits;
 }
 
-const set_trait_rarity = (all_traits, attributes) => {
-  for (let i = 0; i < attributes.length; i++) {
-    let attribute = attributes[i];
-    attribute['trait_count'] = all_traits[attribute.value];
+const get_trait_rarity_score = (trait_type, all_traits) => {
+  let sum = 0;
+  for (let i = 0; i < Object.keys(all_traits[trait_type]).length; i++) {
+    let val = Object.keys(all_traits[trait_type])[0]
+    sum += all_traits[trait_type][val]
+  }
+  return sum;
+}
+
+const set_missing_traits = (punk, missing_traits, all_traits) => {
+  // calculate rarity score for missing traits
+  punk['missing_traits'] = {};
+  for (let i = 0; i < missing_traits.length; i++) {
+    let missing_trait = missing_traits[i];
+    let rarity_score = get_trait_rarity_score(missing_trait, all_traits);
+    console.log(missing_trait, rarity_score);
+    punk['missing_traits'][missing_trait] =  rarity_score
   }
 }
 
-const set_punk_rarity = (all_traits, punk) => {
+const set_trait_rarity = (punk, all_traits) => {
+  let { attributes } = punk;
+  let missing_traits = Object.keys(all_traits);
+  for (let i = 0; i < attributes.length; i++) {
+    let attribute = attributes[i];
+    if (attribute) {
+      let { trait_type, value } = attribute;
+      attribute['trait_count'] = all_traits[trait_type][value];
+      // remove traits that are present
+      missing_traits = missing_traits.filter(trait => trait !== trait_type);
+    }
+  }
+  set_missing_traits(punk, missing_traits, all_traits);
+}
+
+const set_punk_rarity = (punk, all_traits) => {
   let sumoftraits = 10000; //assuming
   let { attributes } = punk;
   let rarity_score = 0;
@@ -42,9 +80,8 @@ const getPunk = (id) => {
   // Precompute the frequency of each trait
   let all_traits = get_all_traits();
   let punk = punks[id];
-  let { attributes } = punk;
-  set_trait_rarity(all_traits, attributes);
-  set_punk_rarity(all_traits, punk);
+  set_trait_rarity(punk, all_traits);
+  set_punk_rarity(punk, all_traits);
   return { ...punk };
 }
 
