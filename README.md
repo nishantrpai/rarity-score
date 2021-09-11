@@ -2,6 +2,7 @@
 
 References: 
 - https://raritytools.medium.com/ranking-rarity-understanding-rarity-calculation-methods-86ceaeb9b98c
+- https://github.com/punkscape/01-rarity-analyser-hackathon
 
 Input: NFT
 
