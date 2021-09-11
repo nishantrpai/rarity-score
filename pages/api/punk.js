@@ -12,15 +12,15 @@ const get_all_traits = () => {
         let { trait_type, value } = attribute;
         if (trait_type in all_traits) {
           // trait = type,gender, beard
+          all_traits[trait_type].sum++;
           if (value in all_traits[trait_type]) {
             all_traits[trait_type][value]++;
           } else {
             all_traits[trait_type][value] = 1;
           }
         } else {
-          all_traits[trait_type] = { [value]: 1 }
+          all_traits[trait_type] = { [value]: 1, sum: 1 }
         }
-
       }
     }
   }
@@ -30,8 +30,10 @@ const get_all_traits = () => {
 
 const get_trait_rarity_score = (trait_type, all_traits) => {
   let sum = 0;
-  for (let i = 0; i < Object.keys(all_traits[trait_type]).length; i++) {
-    let val = Object.keys(all_traits[trait_type])[0]
+  let values = Object.keys(all_traits[trait_type]);
+  console.log(trait_type, values);
+  for (let i = 0; i < values.length; i++) {
+    let val = values[i];
     sum += all_traits[trait_type][val]
   }
   return sum;
@@ -43,8 +45,7 @@ const set_missing_traits = (punk, missing_traits, all_traits) => {
   for (let i = 0; i < missing_traits.length; i++) {
     let missing_trait = missing_traits[i];
     let rarity_score = get_trait_rarity_score(missing_trait, all_traits);
-    console.log(missing_trait, rarity_score);
-    punk['missing_traits'][missing_trait] =  rarity_score
+    punk['missing_traits'][missing_trait] = rarity_score
   }
 }
 
@@ -64,7 +65,7 @@ const set_trait_rarity = (punk, all_traits) => {
 }
 
 const set_punk_rarity = (punk, all_traits) => {
-  let sumoftraits = 10000; //assuming
+  let sumoftraits = all_traits['type'].sum; //All types humans, aliens 
   let { attributes } = punk;
   let rarity_score = 0;
   for (let i = 0; i < attributes.length; i++) {
