@@ -5,7 +5,7 @@ import { ipfs2http } from '../util';
 const fetcher = url => fetch(url).then(r => r.json())
 
 export default function Home() {
-  const { data: nfts, error } = useSWR('/api/nfts', fetcher)
+  const { data: nfts = [], error } = useSWR('/api/nfts', fetcher)
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -28,8 +28,9 @@ export default function Home() {
           </code>
         </p>
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          {nfts.length > 0 && nfts.map((nft) => (
+          {nfts.map((nft,idx) => (
             <a
+              key={idx}
               className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
             >
               <h3 className="text-2xl font-bold">{nft.name}</h3>
