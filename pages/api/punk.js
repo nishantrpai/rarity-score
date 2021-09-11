@@ -8,35 +8,28 @@ const get_all_traits = () => {
     let { attributes } = punk;
     for (let j = 0; j < attributes.length; j++) {
       let attribute = attributes[j];
-      if (attribute) {
-        let { trait_type, value } = attribute;
-        if (trait_type in all_traits) {
-          // trait = type,gender, beard
-          all_traits[trait_type].sum++;
-          if (value in all_traits[trait_type]) {
-            all_traits[trait_type][value]++;
-          } else {
-            all_traits[trait_type][value] = 1;
-          }
+      let { trait_type, value } = attribute;
+      if (all_traits[trait_type]) {
+        // trait exists
+        all_traits[trait_type].sum++;
+        if (all_traits[trait_type][value]) {
+          // trait exists, value exists
+          all_traits[trait_type][value]++;
         } else {
-          all_traits[trait_type] = { [value]: 1, sum: 1 }
+          // trait exists, value doesn't
+          all_traits[trait_type][value] = 1;
         }
+      } else {
+        // trait or value don't exist
+        all_traits[trait_type] = { [value]: 1, sum: 1 }
       }
     }
   }
-  console.log(all_traits);
   return all_traits;
 }
 
 const get_trait_rarity_score = (trait_type, all_traits) => {
-  let sum = 0;
-  let values = Object.keys(all_traits[trait_type]);
-  console.log(trait_type, values);
-  for (let i = 0; i < values.length; i++) {
-    let val = values[i];
-    sum += all_traits[trait_type][val]
-  }
-  return sum;
+  return all_traits[trait_type].sum;
 }
 
 const set_missing_traits = (punk, missing_traits, all_traits) => {
