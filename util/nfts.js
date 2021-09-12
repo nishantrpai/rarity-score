@@ -92,6 +92,6 @@ export const getNFTs = (page_id) => {
   // first page: 0,10 
   // second page: 11,20
   // third page: 21,30
-  let nftcollection = nfts.slice(page_id * 10, ((page_id * 10) + 10)).map(nft => getNFT(nft.id))
+  let nftcollection = nfts.slice(page_id * 12, ((page_id * 12) + 12)).map(nft => getNFT(nft.id))
   return nftcollection;
 }
