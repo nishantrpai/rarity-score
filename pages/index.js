@@ -24,20 +24,6 @@ const Tools = () => {
   )
 }
 
-
-const TraitFilters = (props) => {
-  const { filters } = props;
-  return (
-    <div class="inline-flex w-full px-10 mt-4">
-      {filters.map((filter, index) =>
-        <button class={`bg-blue-100 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 w-full ${index == 0 && 'rounded-l'} ${index == (filters.length - 1) && 'rounded-r'}`}>
-          {filter}
-        </button>
-      )}
-    </div>
-  )
-}
-
 const Filters = (props) => {
   const { traits } = props;
   return (
@@ -69,9 +55,6 @@ const PageNumbers = (props) => {
     </div>
   );
 }
-
-// Tools
-// Each 
 
 export default function Home() {
   const { data: nfts = [], error } = useSWR('/api/nfts', fetcher)
