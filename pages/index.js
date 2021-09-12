@@ -1,116 +1,71 @@
 import Head from 'next/head'
-import React from 'react';
 import useSWR from 'swr'
-import { ipfs2http } from '../util';
+import { NFT } from '../components/NFT';
 
 const fetcher = url => fetch(url).then(r => r.json())
 
 const Tools = () => {
   return (
-    <div class="inline-flex">
-      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l">
-      🔹 Rarity
+    <div class="inline-flex w-full px-10">
+      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+        🔹 Rarity
       </button>
-      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4">
-      🤑 Price
+      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 w-full">
+        🤑 Price
       </button>
-      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4">
-      ⏱️ Recent
+      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 w-full">
+        ⏱️ Recent
       </button>
 
-      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-r">
-      🏷️ ID
+      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-r w-full">
+        🏷️ ID
       </button>
     </div>
   )
 }
 
-const NFT = (nft) => {
-  const [showModal, setShowModal] = React.useState(false);
-  return (
-    <>
-      <a
-        className="mt-6 text-left w-48 cursor-pointer rounded rounded-md
-      focus:text-blue-600 hover:shadow-xl"
-        onClick={() => setShowModal(true)}
-      >
-        <img
-          src={`https://ipfs.io/ipfs/${ipfs2http(nft.image)}`}
-          className="rounded-t-md px-4 bg-red-200" />
-        <div className="px-3 py-3 rounded-b-md text-red-500 
-      bg-red-100">
-          {/* <span className="flex text-xs mb-4 text-gray-500">#{nft.id}</span> */}
-          <span className="flex max-w-max p-1 mb-1 text-xs 
-        rounded rounded-sm text-red-500">
-            {nft.rarity_score.toFixed(2)}
-          </span>
-          <h3 className="text-xs font-bold">{nft.name}</h3>
-        </div>
-      </a>
-      {showModal ? (
-        <>
-          <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto 
-            fixed inset-0 z-50 outline-none focus:outline-none"
-          >
-            <div className="relative w-auto mx-auto sm:max-w-3xl">
-              {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                    {nft.name}
-                  </h3>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button>
-                </div>
-                {/*body*/}
-                <div className="relative p-6 flex-auto">
-                  <img
-                    src={`https://ipfs.io/ipfs/${ipfs2http(nft.image)}`}
-                    className="rounded-md px-4 bg-red-200 max-w-sm"
-                  />
-                </div>
-                {/*footer*/}
-                <div className="flex items-end justify-end p-6 border-t 
-                border-solid border-blueGray-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent 
-                    font-bold uppercase 
-                    px-6 py-2 text-sm outline-none focus:outline-none 
-                    mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
-      ) : null}
-    </>
-  );
-}
 
 const TraitFilters = (props) => {
+  const { filters } = props;
   return (
-    props.filters.map((filter) => <span>{filter}</span>)
+    <div class="inline-flex w-full px-10 mt-4">
+      {filters.map((filter, index) =>
+        <button class={`bg-blue-100 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 w-full ${index == 0 && 'rounded-l'} ${index == (filters.length - 1) && 'rounded-r'}`}>
+          {filter}
+        </button>
+      )}
+    </div>
   )
+}
+
+const Filters = (props) => {
+  const { traits } = props;
+  return (
+    <div class="inline-flex w-full px-10 mt-4">
+      {traits.map((filter, index) =>
+        <button
+        class={`bg-blue-100 hover:bg-blue-300 text-gray-800 
+          font-bold py-2 px-4 w-full 
+          ${index == 0 && 'rounded-l'}
+          ${index == (traits.length - 1) && 'rounded-r'}`}
+        >
+          {filter}
+        </button>
+      )}
+    </div>
+  )
+
 }
 
 const PageNumbers = (props) => {
   return (
-    <div>
-      {[...Array(props.pages).keys()].map((page) => <span>{page + 1}</span>)}
+    <div class="inline-flex mt-8">
+      <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+        Prev
+      </button>
+      <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+        Next
+      </button>
     </div>
   );
 }
@@ -131,7 +86,7 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center 
       w-full flex-1 px-5 text-center mb-8">
         <Tools />
-        <TraitFilters filters={['type', 'eyes', 'neck']} />
+        <Filters traits={['type', 'eyes', 'neck']} />
         <div className="flex flex-wrap items-center justify-evenly 
         max-w-4xl mt-6 sm:w-full">
           {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
@@ -139,19 +94,6 @@ export default function Home() {
 
         <PageNumbers pages={10} />
       </main>
-
-      {/* <footer className="flex items-center justify-center w-full 
-      h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer> */}
-    </div>
+   </div>
   )
 }
