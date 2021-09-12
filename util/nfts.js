@@ -88,10 +88,14 @@ export const getNFT = (id) => {
 }
 
 
-export const getNFTs = (page_id) => {
-  // first page: 0,10 
-  // second page: 11,20
-  // third page: 21,30
-  let nftcollection = nfts.slice(page_id * 12, ((page_id * 12) + 12)).map(nft => getNFT(nft.id))
+export const getNFTs = (page_id, sort_by, order) => {
+  let nftcollection = nfts
+    .map(nft => getNFT(nft.id))
+    .sort((x, y) =>
+      order == 'asc' ?
+        (x[sort_by] > y[sort_by] ? 1 : -1) :
+        (x[sort_by] < y[sort_by] ? 1 : -1))
+    .slice(page_id * 12, ((page_id * 12) + 12))
+
   return nftcollection;
 }
