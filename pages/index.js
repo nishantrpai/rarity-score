@@ -2,24 +2,26 @@ import Head from 'next/head'
 import useSWR from 'swr'
 import { useRouter } from 'next/router';
 import { NFT } from '../components/NFT';
-import { fetcher } from '../util';
+import { fetcher, json2query } from '../util';
+import { route } from 'next/dist/server/router';
 
-const Tools = () => {
+const Tools = (props) => {
+  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
   return (
     <div class="inline-flex w-full px-10">
-      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+      <a class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full" href={`?${json2query({ page_id, sort_by: 'rarity_score', order })}`}>
         🔹 Rarity
-      </button>
-      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 w-full">
+      </a>
+      <a class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full" href={`?${json2query({ page_id, sort_by: 'rarity_score', order })}`}>
         🤑 Price
-      </button>
-      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 w-full">
+      </a>
+      <a class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full" href={`?${json2query({ page_id, sort_by: 'rarity_score', order })}`}>
         ⏱️ Recent
-      </button>
+      </a>
 
-      <button class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-r w-full">
+      <a class="bg-blue-200 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full" href={`?${json2query({ page_id, sort_by: 'id', order })}`}>
         🏷️ ID
-      </button>
+      </a>
     </div>
   )
 }
@@ -44,15 +46,17 @@ const Filters = (props) => {
 }
 
 const PageNumbers = (props) => {
+  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
+
   return (
     <div class="inline-flex mt-8 cursor-pointer">
       {props.currentpage !== 0 &&
-        <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" href={`?page_id=${parseInt(props.currentpage) - 1}`}>
+        <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" href={`?${json2query({ page_id: parseInt(page_id) - 1, sort_by, order })}`}>
           Prev
         </a>
       }
 
-      <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" href={`?page_id=${parseInt(props.currentpage) + 1}`}>
+      <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" href={`?${json2query({ page_id: parseInt(page_id) + 1, sort_by, order })}`}>
         Next
       </a>
 
@@ -75,14 +79,14 @@ export default function Home() {
 
       <main className="flex flex-col items-center justify-center 
       w-full flex-1 px-5 text-center mb-8">
-        <Tools />
+        <Tools {...router.query} />
         <Filters traits={['type', 'eyes', 'neck']} />
         <div className="flex flex-wrap items-center justify-evenly 
         max-w-4xl mt-6 sm:w-full">
           {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
         </div>
 
-        <PageNumbers pages={10} currentpage={page_id} />
+        <PageNumbers {...router.query} />
       </main>
     </div>
   )

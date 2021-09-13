@@ -8,3 +8,7 @@ export const ipfs2http = (ipfs_url) => {
 }
 
 export const fetcher = url => fetch(url).then(r => r.json())
+
+export const json2query = (json) => {
+  return Object.keys(json).map(key => key + '=' + json[key]).join('&');
+}
