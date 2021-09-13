@@ -6,3 +6,5 @@ export const ipfs2http = (ipfs_url) => {
     return '';
   }
 }
+
+export const fetcher = url => fetch(url).then(r => r.json())

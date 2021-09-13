@@ -43,7 +43,8 @@ const set_missing_traits = (nft, missing_traits, all_traits) => {
   for (let i = 0; i < missing_traits.length; i++) {
     let missing_trait = missing_traits[i];
     let rarity_score = get_trait_rarity_score(missing_trait, all_traits);
-    nft['missing_traits'][missing_trait] = rarity_score
+    nft['missing_traits'][missing_trait] = rarity_score;
+    nft['rarity_score'] += rarity_score;
   }
 }
 
@@ -93,8 +94,8 @@ export const getNFTs = (page_id, sort_by, order) => {
     .map(nft => getNFT(nft.id))
     .sort((x, y) =>
       order == 'asc' ?
-        (x[sort_by] > y[sort_by] ? 1 : -1) :
-        (x[sort_by] < y[sort_by] ? 1 : -1))
+        (x[sort_by] - y[sort_by]) :
+        (y[sort_by] - x[sort_by]))
     .slice(page_id * 12, ((page_id * 12) + 12))
 
   return nftcollection;

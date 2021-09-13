@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import useSWR from 'swr'
 import { NFT } from '../components/NFT';
-
-const fetcher = url => fetch(url).then(r => r.json())
+import { fetcher } from '../util';
 
 const Tools = () => {
   return (
@@ -57,7 +56,7 @@ const PageNumbers = (props) => {
 }
 
 export default function Home() {
-  const { data: nfts = [], error } = useSWR('/api/nfts', fetcher)
+  const { data: nfts = [], error } = useSWR('/api/nfts?page_id=0&sort_by=rarity_score&order=desc', fetcher)
   return (
     <div className="flex flex-col items-center justify-center 
     min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100">
