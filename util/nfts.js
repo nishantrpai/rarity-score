@@ -10,19 +10,21 @@ const get_all_traits = () => {
       for (let j = 0; j < attributes.length; j++) {
         let attribute = attributes[j];
         let { trait_type, value } = attribute;
-        if (all_traits[trait_type]) {
-          // trait exists
-          all_traits[trait_type].sum++;
-          if (all_traits[trait_type][value]) {
-            // trait exists, value exists
-            all_traits[trait_type][value]++;
+        if (trait_type && value) {
+          if (all_traits[trait_type]) {
+            // trait exists
+            all_traits[trait_type].sum++;
+            if (all_traits[trait_type][value]) {
+              // trait exists, value exists
+              all_traits[trait_type][value]++;
+            } else {
+              // trait exists, value doesn't
+              all_traits[trait_type][value] = 1;
+            }
           } else {
-            // trait exists, value doesn't
-            all_traits[trait_type][value] = 1;
+            // trait or value don't exist
+            all_traits[trait_type] = { [value]: 1, sum: 1 }
           }
-        } else {
-          // trait or value don't exist
-          all_traits[trait_type] = { [value]: 1, sum: 1 }
         }
       }
     }
@@ -38,12 +40,15 @@ const get_trait_rarity_score = (trait_type, all_traits) => {
 }
 
 const set_missing_traits = (nft, missing_traits, all_traits) => {
-  // calculate rarity score for missing traits
-  nft['missing_traits'] = {};
+  // How many traits don't have say Eyes, Mouth
+  let totaltraits = all_traits['type'].sum;
+  nft['missing_traits'] = [];
   for (let i = 0; i < missing_traits.length; i++) {
     let missing_trait = missing_traits[i];
-    let rarity_score = get_trait_rarity_score(missing_trait, all_traits);
-    nft['missing_traits'][missing_trait] = rarity_score;
+    let rarity_count = get_trait_rarity_score(missing_trait, all_traits);
+    let missing_count = totaltraits - rarity_count; 
+    let rarity_score = (1 / (missing_count / totaltraits));
+    nft['missing_traits'].push({ trait_type: missing_trait, rarity_score, missing_count });
     nft['rarity_score'] += rarity_score;
   }
 }
