@@ -8,9 +8,11 @@ import { FiArrowLeft } from "react-icons/fi";
 const Trait = (attribute) => {
   return (
     <div className="flex">
-      <span>{attribute.trait_type}</span>
-      <span>{attribute.value}</span>
-      <span>{attribute.trait_count}</span>
+      <span>{attribute.trait_type} | </span>
+      <span>{attribute.value} | </span>
+      <span>{attribute.percentile} | </span>
+      <span>{attribute.count} | </span>
+      <span>{attribute.rarity_score.toFixed(2)}</span>
     </div>
   )
 }
@@ -19,7 +21,6 @@ const Trait = (attribute) => {
 export default function NFT() {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
   const { data: nft = {}, error } = useSWR(`/api/nft?id=${id}`, fetcher)
 
   return (
@@ -53,6 +54,7 @@ export default function NFT() {
             </div>
             <div className="py-4">
               {nft?.attributes?.map((attribute) => <Trait {...attribute} />)}
+              {nft?.missing_traits?.map((attribute) => <Trait {...attribute} />)}
             </div>
           </div>
         </main>
