@@ -3,10 +3,17 @@ import nfts from '../data/collection.json';
 
 const get_all_traits = () => {
   let all_traits = {};
+  let attr_count = {}; //track attribute count of each nft
   for (let i = 0; i < nfts.length; i++) {
     let nft = nfts[i];
     if (nft) {
       let { attributes } = nft;
+      attributes = attributes.filter(attribute => (attribute['trait_type'] && attribute['value']))
+      if (attr_count[attributes.length]) {
+        attr_count[attributes.length] = attr_count[attributes.length] + 1;
+      } else {
+        attr_count[attributes.length] = 1;
+      }
       for (let j = 0; j < attributes.length; j++) {
         let attribute = attributes[j];
         let { trait_type, value } = attribute;
@@ -29,10 +36,10 @@ const get_all_traits = () => {
       }
     }
   }
-  return all_traits;
+  return { all_traits, attr_count };
 }
 
-let all_traits = get_all_traits();
+let { all_traits, attr_count } = get_all_traits();
 
 
 const get_trait_rarity_score = (trait_type, all_traits) => {
@@ -47,8 +54,10 @@ const set_missing_traits = (nft, missing_traits, all_traits) => {
     let missing_trait = missing_traits[i];
     let rarity_count = get_trait_rarity_score(missing_trait, all_traits);
     let missing_count = totaltraits - rarity_count;
-    let rarity_score = (1 / (missing_count / totaltraits));
-    nft['missing_traits'].push({ trait_type: missing_trait, rarity_score, missing_count });
+    let percentile = (missing_count / totaltraits);
+    let rarity_score = (1 / percentile);
+
+    nft['missing_traits'].push({ trait_type: missing_trait, rarity_score, missing_count, percentile });
   }
 }
 
@@ -77,8 +86,19 @@ const set_nft_rarity = (nft, all_traits) => {
     let { attributes } = nft;
     for (let i = 0; i < attributes.length; i++) {
       let attribute = attributes[i];
+      attribute['percentile'] = (attribute['trait_count'] / sumoftraits);
       attribute['rarity_score'] = 1 / (attribute['trait_count'] / sumoftraits);
     }
+  }
+}
+
+const calculate_attribute_rarity = (nft) => {
+  const { attributes } = nft;
+  let sumoftraits = all_traits['type'].sum;
+  nft['trait_count'] = {
+    count: attributes.length,
+    percentile: attr_count[attributes.length] / sumoftraits,
+    rarity_score: 1 / (attr_count[attributes.length] / sumoftraits)
   }
 }
 
@@ -92,6 +112,7 @@ const calculate_nft_rarity = (nft) => {
   for (let i = 0; i < missing_traits.length; i++) {
     nft['rarity_score'] += missing_traits[i]['rarity_score'];
   }
+  nft['rarity_score'] += nft['trait_count']['rarity_score'];
 }
 
 export const getNFT = (id) => {
@@ -100,6 +121,7 @@ export const getNFT = (id) => {
   let nft = nfts[id];
   set_trait_rarity(nft, all_traits);
   set_nft_rarity(nft, all_traits);
+  calculate_attribute_rarity(nft);
   calculate_nft_rarity(nft);
   return { ...nft };
 }
