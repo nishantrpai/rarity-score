@@ -64,6 +64,7 @@ const set_missing_traits = (nft, missing_traits, all_traits) => {
 const set_trait_rarity = (nft, all_traits) => {
   if (nft) {
     let { attributes } = nft;
+    attributes = attributes.filter(attribute => (attribute['trait_type'] && attribute['value']))
     let missing_traits = Object.keys(all_traits);
     for (let i = 0; i < attributes.length; i++) {
       let attribute = attributes[i];
@@ -84,6 +85,7 @@ const set_nft_rarity = (nft, all_traits) => {
   let sumoftraits = all_traits['type'].sum; //All types humans, aliens 
   if (nft) {
     let { attributes } = nft;
+    attributes = attributes.filter(attribute => (attribute['trait_type'] && attribute['value']))
     for (let i = 0; i < attributes.length; i++) {
       let attribute = attributes[i];
       attribute['percentile'] = (attribute['trait_count'] / sumoftraits);
@@ -93,7 +95,8 @@ const set_nft_rarity = (nft, all_traits) => {
 }
 
 const calculate_attribute_rarity = (nft) => {
-  const { attributes } = nft;
+  let { attributes } = nft;
+  attributes = attributes.filter(attribute => (attribute['trait_type'] && attribute['value']))
   let sumoftraits = all_traits['type'].sum;
   nft['trait_count'] = {
     count: attributes.length,
@@ -103,7 +106,8 @@ const calculate_attribute_rarity = (nft) => {
 }
 
 const calculate_nft_rarity = (nft) => {
-  const { attributes, missing_traits } = nft;
+  let { attributes, missing_traits } = nft;
+  attributes = attributes.filter(attribute => (attribute['trait_type'] && attribute['value']))
   nft['rarity_score'] = 0;
   for (let i = 0; i < attributes.length; i++) {
     nft['rarity_score'] += attributes[i]['rarity_score'];
