@@ -123,11 +123,13 @@ export const getNFT = (id) => {
   // Retrieve nft for id
   // Precompute the frequency of each trait
   let nft = nfts[id];
-  set_trait_rarity(nft, all_traits);
-  set_nft_rarity(nft, all_traits);
-  calculate_attribute_rarity(nft);
-  calculate_nft_rarity(nft);
-  return { ...nft };
+  if (nft) {
+    set_trait_rarity(nft, all_traits);
+    set_nft_rarity(nft, all_traits);
+    calculate_attribute_rarity(nft);
+    calculate_nft_rarity(nft);
+    return { ...nft };
+  }
 }
 
 
