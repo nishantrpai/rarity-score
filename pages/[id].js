@@ -12,7 +12,7 @@ const Trait = (attribute) => {
       <span>{attribute.value} | </span>
       <span>{attribute.percentile} | </span>
       <span>{attribute.count} | </span>
-      <span>{attribute.rarity_score.toFixed(2)}</span>
+      <span>{attribute.rarity_score?.toFixed(2)}</span>
     </div>
   )
 }
