@@ -107,7 +107,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:image" content={`/api/image?data=${image}`} />
-        <meta property="og:image" content={`/api/image?data=${image}`} />
+        <meta property="og:title" content="A Twitter for My Sister" />
+<meta property="og:image" content={`/api/image?data=${image}`} />
       </Head>
 
       <main className="flex flex-col items-center justify-center 
