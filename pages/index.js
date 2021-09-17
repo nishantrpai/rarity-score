@@ -77,7 +77,7 @@ const PageNumbers = (props) => {
         </a>
       }
 
-      <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick={() => router.push(`?${json2query({ page_id: parseInt(page_id) + 1, sort_by, order })}`)}>
+      <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick={() => router.push(`?${json2query({ page_id: parseInt(page_id) + 1, sort_by, order })}`)}>
         Next
       </a>
 
