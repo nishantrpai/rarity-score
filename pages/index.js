@@ -105,6 +105,8 @@ export default function Home() {
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:image" content={`/api/image?data=${image}`} />
         <meta property="og:image" content={`/api/image?data=${image}`} />
       </Head>
 
