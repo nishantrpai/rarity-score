@@ -1,8 +1,11 @@
 import Head from 'next/head'
+import React, { createRef, useState } from 'react';
 import useSWR from 'swr'
-import router, { useRouter } from 'next/router';
+import { useScreenshot } from 'use-react-screenshot';
+import { useRouter } from 'next/router';
 import { NFT } from '../components/NFT';
 import { fetcher, json2query } from '../util';
+import { useEffect } from 'react';
 
 const Tools = (props) => {
   const router = useRouter();
@@ -87,18 +90,27 @@ const PageNumbers = (props) => {
 
 export default function Home() {
   const router = useRouter();
+  const ref = createRef(null)
+  const [image, takeScreenshot] = useScreenshot();
   const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = router.query;
   const { data: nfts = [], error } = useSWR(`/api/nfts?page_id=${page_id}&sort_by=${sort_by}&order=${order}`, fetcher)
+
+  useEffect(() => {
+    takeScreenshot(ref.current);
+  },[]);
+
   return (
     <div className="flex flex-col items-center justify-center 
-    min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100">
+    min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100" ref={ref}>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content={`/api/image?data=${image}`} />
       </Head>
 
       <main className="flex flex-col items-center justify-center 
       w-full flex-1 px-5 text-center mb-8">
+        <img src={image} alt='screenshot' />
         <Tools {...router.query} />
         <Filters traits={['type', 'eyes', 'neck']} />
         <div className="flex flex-wrap items-center justify-evenly 

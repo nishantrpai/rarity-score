@@ -6,11 +6,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "html2canvas": "^1.3.2",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-    "swr": "^1.0.0"
+    "swr": "^1.0.0",
+    "use-react-screenshot": "^1.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
