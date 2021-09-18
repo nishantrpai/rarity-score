@@ -97,7 +97,7 @@ export default function Home() {
 
   useEffect(() => {
     takeScreenshot(ref.current);
-  },[]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center 
@@ -106,9 +106,20 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:image" content={`/api/image?data=${image}`} />
+        <meta name="twitter:site" content="@nytimesbits" />
+        <meta name="twitter:creator" content="@nickbilton" />
+        <meta property="og:url" content="http://bits.blogs.nytimes.com/2011/12/08/a-twitter-for-my-sister/" />
+        <meta content="It's really important to remember that:
+1. Making something bad.
+2. Then iterating until it's good.
+
+... is way faster than:
+
+1. Make something good upfront.
+
+This shortcut is used by the great, prolific creators. https://t.co/xwLnRzXvkE" property="og:description" data-rh="true" />
         <meta property="og:title" content="A Twitter for My Sister" />
-<meta property="og:image" content={`/api/image?data=${image}`} />
+        <meta property="og:image" content={`/api/image?data=${image}`} />
       </Head>
 
       <main className="flex flex-col items-center justify-center 
