@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { fetcher, getDesc, ipfs2http } from '../util';
 import { FiArrowLeft } from "react-icons/fi";
+import { NextSeo } from 'next-seo';
 
 
 const Trait = (attribute) => {
@@ -28,13 +29,18 @@ export default function NFT() {
     <>
       <div className="flex flex-col items-center justify-center 
       min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100">
-        {nft &&
-          <Head>
-            <title>{nft?.name}</title>
-            <link rel="icon" href="/favicon.ico" />
-            <meta property="og:description" content={getDesc(nft)}></meta>
-            <meta property="og:image" content={`https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`} />
-          </Head>
+        {Object.keys(nft).length > 0 &&
+          <NextSeo
+            title={nft?.name}
+            openGraph={{
+              images: [
+                {
+                  url: `https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`
+                }
+              ],
+            }}
+            description={getDesc(nft)}
+          />
         }
 
         <main className="flex flex-col items-center justify-center 
