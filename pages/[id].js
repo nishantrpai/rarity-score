@@ -28,12 +28,14 @@ export default function NFT() {
     <>
       <div className="flex flex-col items-center justify-center 
       min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100">
-        <Head>
-          <title>{nft?.name}</title>
-          <link rel="icon" href="/favicon.ico" />
-          <meta property="og:description" content={getDesc(nft)}></meta>
-          <meta property="og:image" content={`https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`} />
-        </Head>
+        {nft &&
+          <Head>
+            <title>{nft?.name}</title>
+            <link rel="icon" href="/favicon.ico" />
+            <meta property="og:description" content={getDesc(nft)}></meta>
+            <meta property="og:image" content={`https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`} />
+          </Head>
+        }
 
         <main className="flex flex-col items-center justify-center 
         w-full flex-1 px-5 text-center mb-8 max-w-xl">
