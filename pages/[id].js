@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import { fetcher, ipfs2http } from '../util';
+import { fetcher, getDesc, ipfs2http } from '../util';
 import { FiArrowLeft } from "react-icons/fi";
 
 
@@ -23,6 +23,7 @@ export default function NFT() {
   const { id } = router.query;
   const { data: nft = {}, error } = useSWR(`/api/nft?id=${id}`, fetcher)
 
+
   return (
     <>
       <div className="flex flex-col items-center justify-center 
@@ -30,6 +31,8 @@ export default function NFT() {
         <Head>
           <title>{nft?.name}</title>
           <link rel="icon" href="/favicon.ico" />
+          <meta property="og:description" content={getDesc(nft)}></meta>
+          <meta property="og:image" content={`https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`} />
         </Head>
 
         <main className="flex flex-col items-center justify-center 

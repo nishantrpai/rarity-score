@@ -6,5 +6,5 @@ export default function nftsAPI(req, res) {
     let { page_id, sort_by, order } = req.query;
     page_id = page_id ? page_id : 0;
     let nfts = getNFTs(page_id, sort_by, order);
-    res.status(200).json(nfts);
+    res.status(200).json({ nfts, 'collection_name': 'One Day Punks' });
 }
