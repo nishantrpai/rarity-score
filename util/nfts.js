@@ -132,15 +132,21 @@ export const getNFT = (id) => {
   }
 }
 
+export const set_nft_rank = (nft, rank) => {
+  nft['rarity_rank'] = rank;
+  return { ...nft };
+}
+
 
 export const getNFTs = (page_id, sort_by, order) => {
   let nftcollection = nfts
     .map(nft => getNFT(nft.id))
+    .sort((x, y) => y['rarity_score'] - x['rarity_score'])
+    .map((nft, index) => set_nft_rank(nft, index))
     .sort((x, y) =>
       order == 'asc' ?
         (x[sort_by] - y[sort_by]) :
         (y[sort_by] - x[sort_by]))
     .slice(page_id * 12, ((page_id * 12) + 12))
-
   return nftcollection;
 }
