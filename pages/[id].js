@@ -30,7 +30,9 @@ function NFT({ nft }) {
           openGraph={{
             images: [
               {
-                url: img_url
+                url: img_url,
+                width: 500,
+                height: 500
               }
             ],
           }}
