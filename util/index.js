@@ -6,7 +6,7 @@ export const getDesc = (nft) => {
 export const ipfs2http = (ipfs_url) => {
   if (ipfs_url) {
     let url = new URL(ipfs_url);
-    return url.host;
+    return (url.host || url.pathname.substr(2));
   } else {
     return '';
   }
