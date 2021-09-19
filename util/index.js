@@ -1,11 +1,6 @@
 export const getDesc = (nft) => {
   let desc;
-  desc = `
-🔷 ID: ${nft.id}
-
-🔷 Rarity score: ${nft.rarity_score}
-
-🔷 Rarity rank: 1`
+  desc = `🔷 ID: ${nft.id}<br/>🔷 Rarity score: ${nft.rarity_score}<br/>🔷 Rarity rank: 1`
   return desc;
 }
 export const ipfs2http = (ipfs_url) => {
