@@ -1,6 +1,6 @@
 # Punkscape Hackathon
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/project?template=https://github.com/nishantrpai/rarity-score/tree/main)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/project?template=https://github.com/nishantrpai/rarity-score)
 
 
 References: 
