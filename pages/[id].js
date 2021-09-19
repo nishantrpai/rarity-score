@@ -30,11 +30,12 @@ function NFT({ nft }) {
           openGraph={{
             images: [
               {
-                url: img_url,
-                width: 500,
-                height: 500
+                url: img_url
               }
             ],
+          }}
+          twitter={{
+            cardType: 'summary_large_image'
           }}
           description={getDesc(nft)}
         />
