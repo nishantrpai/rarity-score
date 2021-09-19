@@ -90,9 +90,13 @@ export default function Home() {
   const router = useRouter();
   const ref = createRef(null)
   const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = router.query;
-  const { data = [], error } = useSWR(`/api/nfts?page_id=${page_id}&sort_by=${sort_by}&order=${order}`, fetcher)
+  const { data, error } = useSWR(`/api/nfts?page_id=${page_id}&sort_by=${sort_by}&order=${order}`, fetcher)
+
+  if (error) return <></>;
+  if (!data) return <></>;
+
   const { nfts = [], collection_name } = data;
-  console.log(nfts);
+
   return (
     <div className="flex flex-col items-center justify-center 
     min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100" ref={ref}>

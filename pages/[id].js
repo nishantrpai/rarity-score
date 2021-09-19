@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { fetcher, getDesc, ipfs2http } from '../util';
 import { FiArrowLeft } from "react-icons/fi";
 import { NextSeo } from 'next-seo';
+import { Loading } from '../components/Loading';
 
 
 const Trait = (attribute) => {
@@ -22,26 +23,26 @@ const Trait = (attribute) => {
 export default function NFT() {
   const router = useRouter();
   const { id } = router.query;
-  const { data: nft = {}, error } = useSWR(`/api/nft?id=${id}`, fetcher)
+  const { data: nft, error } = useSWR(`/api/nft?id=${id}`, fetcher)
 
+  if (error) return <></>;
+  if (!nft) return <></>;
 
   return (
     <>
       <div className="flex flex-col items-center justify-center 
       min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100">
-        {Object.keys(nft).length > 0 &&
-          <NextSeo
-            title={nft?.name}
-            openGraph={{
-              images: [
-                {
-                  url: `https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`
-                }
-              ],
-            }}
-            description={getDesc(nft)}
-          />
-        }
+        <NextSeo
+          title={nft?.name}
+          openGraph={{
+            images: [
+              {
+                url: `https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`
+              }
+            ],
+          }}
+          description={getDesc(nft)}
+        />
 
         <main className="flex flex-col items-center justify-center 
         w-full flex-1 px-5 text-center mb-8 max-w-xl">
