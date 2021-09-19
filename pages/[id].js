@@ -1,10 +1,7 @@
-import Head from 'next/head';
-import useSWR from 'swr';
-import { useRouter } from 'next/router';
-import { fetcher, getDesc, ipfs2http } from '../util';
+import { getDesc, ipfs2http } from '../util';
 import { FiArrowLeft } from "react-icons/fi";
 import { NextSeo } from 'next-seo';
-import { Loading } from '../components/Loading';
+import { useEffect } from 'react';
 
 
 const Trait = (attribute) => {
@@ -20,13 +17,9 @@ const Trait = (attribute) => {
 }
 
 
-export default function NFT() {
-  const router = useRouter();
-  const { id } = router.query;
-  const { data: nft, error } = useSWR(`/api/nft?id=${id}`, fetcher)
+function NFT({ nft }) {
 
-  if (error) return <></>;
-  if (!nft) return <></>;
+  const img_url = `https://ipfs.io/ipfs/${ipfs2http(nft.image)}`;
 
   return (
     <>
@@ -37,7 +30,7 @@ export default function NFT() {
           openGraph={{
             images: [
               {
-                url: `https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`
+                url: img_url
               }
             ],
           }}
@@ -58,15 +51,15 @@ export default function NFT() {
               {nft?.name}
             </h3>
             <img
-              src={`https://ipfs.io/ipfs/${ipfs2http(nft?.image)}`}
+              src={img_url}
               className="rounded-md px-4 bg-black w-full"
             />
             <div className="py-4 px-2 w-full border border-4 mt-4">
               {nft.rarity_score}
             </div>
             <div className="py-4">
-              {nft?.attributes?.map((attribute) => <Trait {...attribute} />)}
-              {nft?.missing_traits?.map((attribute) => <Trait {...attribute} />)}
+              {nft?.attributes?.map((attribute, idx) => <Trait key={idx} {...attribute} />)}
+              {nft?.missing_traits?.map((attribute, idx) => <Trait key={idx * 100} {...attribute} />)}
             </div>
           </div>
         </main>
@@ -75,3 +68,14 @@ export default function NFT() {
 
   )
 }
+
+NFT.getInitialProps = async ({ query }) => {
+  const res = await fetch(`https://punkscape-rarity.vercel.app/api/nft?id=${query.id}`);
+  const data = await res.json();
+  if (data)
+    return { nft: data };
+  else
+    return { nft: {} }
+}
+
+export default NFT;
