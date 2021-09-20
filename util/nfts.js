@@ -122,6 +122,7 @@ const calculate_nft_rarity = (nft) => {
 export const getNFT = (id) => {
   // Retrieve nft for id
   // Precompute the frequency of each trait
+  nfts = nfts.sort((x, y) => x['id'] - y['id']);
   let nft = nfts[id];
   if (nft) {
     set_trait_rarity(nft, all_traits);
