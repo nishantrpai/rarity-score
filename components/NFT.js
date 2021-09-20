@@ -2,7 +2,6 @@ import React from 'react';
 import { ipfs2http } from '../util';
 
 export const NFT = (nft) => {
-  console.log(nft.image, `https://ipfs.io/ipfs/${ipfs2http(nft.image)}`);
   return (
     <>
       <a

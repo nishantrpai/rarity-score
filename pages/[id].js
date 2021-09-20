@@ -1,7 +1,8 @@
-import { getDesc, ipfs2http } from '../util';
+import { formatPrice, getDesc, ipfs2http } from '../util';
 import { FiArrowLeft } from "react-icons/fi";
 import { NextSeo } from 'next-seo';
 import { useEffect } from 'react';
+import { getNFT, getNFTInfo } from '../util/requests';
 
 
 const Trait = (attribute) => {
@@ -60,7 +61,11 @@ function NFT({ nft }) {
             <div className="py-4 px-2 w-full border border-4 mt-4">
               {nft.rarity_score}
             </div>
+            <a className="py-4 px-2 w-full border border-4 mt-4" href={nft?.opensea_link}>
+              Opensea Link
+            </a>
             <div className="py-4">
+              {nft.current_price !== '-' && <span>{`Ξ${formatPrice(nft?.current_price)}`}</span>}
               {nft?.attributes?.map((attribute, idx) => <Trait key={idx} {...attribute} />)}
               {nft?.missing_traits?.map((attribute, idx) => <Trait key={idx * 100} {...attribute} />)}
             </div>
@@ -73,10 +78,14 @@ function NFT({ nft }) {
 }
 
 NFT.getInitialProps = async ({ query }) => {
-  const res = await fetch(`https://punkscape-rarity.vercel.app/api/nft?id=${query.id}`);
-  const data = await res.json();
-  if (data)
-    return { nft: data };
+  let nft = await getNFT(query.id);
+  let opensea_info = await getNFTInfo(query.id);
+  nft['opensea_link'] = opensea_info['assets'][0]['permalink'];
+  nft['current_price'] = '-'
+  if (opensea_info['assets'][0]['sell_orders'])
+    nft['current_price'] = opensea_info['assets'][0]['sell_orders'][0]['current_price']; //last price
+  if (nft)
+    return { nft };
   else
     return { nft: {} }
 }
