@@ -157,27 +157,20 @@ export const getFilters = () => {
 export const filterNFT = (nft, traits) => {
   if (traits.length > 0) {
     let { attributes } = nft;
+    let traits_count = traits.length;
     attributes = attributes.filter(attribute => (attribute['trait_type'] && attribute['value']))
-    let trait_vals = [];
     for (let i = 0; i < attributes.length; i++) {
-      trait_vals.push(attributes[i].trait_type);
+      let { trait_type, value } = attributes[i];
+      for (let j = 0; j < traits.length; j++) {
+        if (trait_type == traits[j] || value == traits[j])
+          traits_count--;
+      }
     }
 
-    if (traits.length > trait_vals.length)
+    if (traits_count == 0)
+      return true;
+    else
       return false;
-    else {
-      let traits_count = traits.length;
-      for (let i = 0; i < trait_vals.length; i++) {
-        for (let j = 0; j < traits.length; j++) {
-          if (trait_vals[i] == traits[j])
-            traits_count--;
-        }
-      }
-      if (traits_count == 0)
-        return true;
-      else
-        return false;
-    }
   }
   return true;
 }

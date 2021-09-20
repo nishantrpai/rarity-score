@@ -7,41 +7,41 @@ import { fetcher, json2query } from '../util';
 
 const Tools = (props) => {
   const router = useRouter();
-  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
+  let { page_id = 0, sort_by = 'rarity_score', order = 'desc', traits = '' } = router.query;
   const handleChange = (e) => {
     let option = e.target.value;
     if (option.toLowerCase().includes('rarity')) {
-      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order })}`);
+      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order, traits })}`);
     }
 
     if (option.toLowerCase().includes('price')) {
-      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order })}`);
+      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order, traits })}`);
 
     }
 
     if (option.toLowerCase().includes('recent')) {
-      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order })}`);
+      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order, traits })}`);
 
     }
 
     if (option.toLowerCase().includes('id')) {
-      router.push(`?${json2query({ page_id, sort_by: 'id', order })}`);
+      router.push(`?${json2query({ page_id, sort_by: 'id', order, traits })}`);
     }
   }
 
   return (
     <select onChange={handleChange} className="mb-4">
-      <option class="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+      <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
         🔹 Rarity
       </option>
-      <option class="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+      <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
         🤑 Price
       </option>
-      <option class="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+      <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
         ⏱️ Recent
       </option>
 
-      <option class="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+      <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
         🏷️ ID
       </option>
     </select>
@@ -50,17 +50,19 @@ const Tools = (props) => {
 
 const Filters = (props) => {
   const router = useRouter();
-  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
-  const { traits } = props;
+  let { page_id = 0, sort_by = 'rarity_score', order = 'desc', traits = '' } = router.query;
+  const { filters } = props;
   const handleChange = (e) => {
-    router.push(`?${json2query({ page_id, sort_by, order, traits: ['Beard', 'Eyes'] })}`);
+    traits = traits.split(',').filter(val => val);
+    traits.push(e.target.value);
+    router.push(`?${json2query({ page_id, sort_by, order, traits })}`);
   }
 
   return (
     <select onChange={handleChange}>
-      {traits.map((filter, index) =>
+      {filters.map((filter, index) =>
         <option
-          class={`bg-blue-100 hover:bg-blue-300 text-gray-800 
+          className={`bg-blue-100 hover:bg-blue-300 text-gray-800 
           font-bold py-2 px-4 w-full 
           ${index == 0 && 'rounded-l'}
           ${index == (traits.length - 1) && 'rounded-r'}`}
@@ -74,17 +76,17 @@ const Filters = (props) => {
 }
 
 const PageNumbers = (props) => {
-  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
   const router = useRouter();
+  let { page_id = 0, sort_by = 'rarity_score', order = 'desc', traits = '' } = router.query;
   return (
-    <div class="inline-flex mt-8 cursor-pointer">
+    <div className="inline-flex mt-8 cursor-pointer">
       {props.currentpage !== 0 &&
-        <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick={() => router.push(`?${json2query({ page_id: parseInt(page_id) - 1, sort_by, order })}`)}>
+        <a className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick={() => router.push(`?${json2query({ page_id: parseInt(page_id) - 1, sort_by, order, traits })}`)}>
           Prev
         </a>
       }
 
-      <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick={() => router.push(`?${json2query({ page_id: parseInt(page_id) + 1, sort_by, order })}`)}>
+      <a className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick={() => router.push(`?${json2query({ page_id: parseInt(page_id) + 1, sort_by, order, traits })}`)}>
         Next
       </a>
 
@@ -117,7 +119,7 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center 
       w-full flex-1 px-5 text-center mb-8">
         <Tools {...router.query} />
-        <Filters traits={Object.keys(filters)} />
+        <Filters filters={Object.keys(filters)} />
         <div className="flex flex-wrap items-center justify-evenly 
         max-w-4xl mt-6 sm:w-full">
           {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
