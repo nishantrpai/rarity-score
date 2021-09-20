@@ -49,9 +49,15 @@ const Tools = (props) => {
 }
 
 const Filters = (props) => {
+  const router = useRouter();
+  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
   const { traits } = props;
+  const handleChange = (e) => {
+    router.push(`?${json2query({ page_id, sort_by, order, traits: ['Beard', 'Eyes'] })}`);
+  }
+
   return (
-    <select>
+    <select onChange={handleChange}>
       {traits.map((filter, index) =>
         <option
           class={`bg-blue-100 hover:bg-blue-300 text-gray-800 
@@ -89,13 +95,16 @@ const PageNumbers = (props) => {
 export default function Home() {
   const router = useRouter();
   const ref = createRef(null)
-  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = router.query;
-  const { data, error } = useSWR(`/api/nfts?page_id=${page_id}&sort_by=${sort_by}&order=${order}`, fetcher)
+  const { page_id = '0', sort_by = 'rarity_score', order = 'desc', traits = '' } = router.query;
+  const { data, error } = useSWR(`/api/nfts?page_id=${page_id}&sort_by=${sort_by}&order=${order}${traits && `&traits=${traits}`}`, fetcher)
+  const { data: filters, error: filter_error } = useSWR(`/api/filters`, fetcher)
 
   if (error) return <></>;
   if (!data) return <></>;
+  if (!filters) return <></>
 
   const { nfts = [], collection_name } = data;
+
 
   return (
     <div className="flex flex-col items-center justify-center 
@@ -108,7 +117,7 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center 
       w-full flex-1 px-5 text-center mb-8">
         <Tools {...router.query} />
-        <Filters traits={['type', 'eyes', 'neck']} />
+        <Filters traits={Object.keys(filters)} />
         <div className="flex flex-wrap items-center justify-evenly 
         max-w-4xl mt-6 sm:w-full">
           {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}

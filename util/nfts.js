@@ -149,12 +149,46 @@ const set_nfts_rank = () => {
 
 set_nfts_rank();
 
-export const getNFTs = (page_id, sort_by, order) => {
+export const getFilters = () => {
+  let filters = all_traits;
+  return filters;
+}
+
+export const filterNFT = (nft, traits) => {
+  if (traits.length > 0) {
+    let { attributes } = nft;
+    attributes = attributes.filter(attribute => (attribute['trait_type'] && attribute['value']))
+    let trait_vals = [];
+    for (let i = 0; i < attributes.length; i++) {
+      trait_vals.push(attributes[i].trait_type);
+    }
+
+    if (traits.length > trait_vals.length)
+      return false;
+    else {
+      let traits_count = traits.length;
+      for (let i = 0; i < trait_vals.length; i++) {
+        for (let j = 0; j < traits.length; j++) {
+          if (trait_vals[i] == traits[j])
+            traits_count--;
+        }
+      }
+      if (traits_count == 0)
+        return true;
+      else
+        return false;
+    }
+  }
+  return true;
+}
+
+export const getNFTs = (page_id, sort_by, order, traits) => {
   let nftcollection = nfts
     .sort((x, y) =>
       order == 'asc' ?
         (x[sort_by] - y[sort_by]) :
         (y[sort_by] - x[sort_by]))
+    .filter(nft => filterNFT(nft, traits))
     .slice(page_id * 12, ((page_id * 12) + 12))
   return nftcollection;
 }
