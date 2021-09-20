@@ -7,60 +7,63 @@ import { fetcher, json2query } from '../util';
 
 const Tools = (props) => {
   const router = useRouter();
-  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
   const handleChange = (e) => {
     let option = e.target.value;
     if (option.toLowerCase().includes('rarity')) {
-      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order })}`);
-    }
-
-    if (option.toLowerCase().includes('price')) {
-      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order })}`);
-
-    }
-
-    if (option.toLowerCase().includes('recent')) {
-      router.push(`?${json2query({ page_id, sort_by: 'rarity_score', order })}`);
-
+      if (option.includes('desc')) {
+        router.push(`?${json2query({ ...router.query, sort_by: 'rarity_score', order: 'desc' })}`);
+      }
+      if (option.includes('asc')) {
+        router.push(`?${json2query({ ...router.query, sort_by: 'rarity_score', order: 'asc' })}`);
+      }
     }
 
     if (option.toLowerCase().includes('id')) {
-      router.push(`?${json2query({ page_id, sort_by: 'id', order })}`);
+      if (option.includes('desc')) {
+        router.push(`?${json2query({ ...router.query, sort_by: 'id', order: 'desc' })}`);
+      }
+      if (option.includes('asc')) {
+        router.push(`?${json2query({ ...router.query, sort_by: 'id', order: 'asc' })}`);
+      }
+
     }
   }
 
   return (
     <select onChange={handleChange} className="mb-4">
-      <option class="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
-        🔹 Rarity
+      <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+        🔹 Rarity desc
       </option>
-      <option class="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
-        🤑 Price
-      </option>
-      <option class="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
-        ⏱️ Recent
+      <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+        🔹 Rarity asc
       </option>
 
-      <option class="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
-        🏷️ ID
+      <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+        🏷️ ID desc
       </option>
+      <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
+        🏷️ ID asc
+      </option>
+
     </select>
   )
 }
 
 const Filters = (props) => {
   const router = useRouter();
-  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
-  const { traits } = props;
+  let { page_id = 0, sort_by = 'rarity_score', order = 'desc', traits = '' } = router.query;
+  const { filters } = props;
   const handleChange = (e) => {
-    router.push(`?${json2query({ page_id, sort_by, order, traits: ['Beard', 'Eyes'] })}`);
+    traits = traits.split(',').filter(val => val);
+    traits.push(e.target.value);
+    router.push(`?${json2query({ page_id, sort_by, order, traits })}`);
   }
 
   return (
     <select onChange={handleChange}>
-      {traits.map((filter, index) =>
+      {filters.map((filter, index) =>
         <option
-          class={`bg-blue-100 hover:bg-blue-300 text-gray-800 
+          className={`bg-blue-100 hover:bg-blue-300 text-gray-800 
           font-bold py-2 px-4 w-full 
           ${index == 0 && 'rounded-l'}
           ${index == (traits.length - 1) && 'rounded-r'}`}
@@ -74,17 +77,17 @@ const Filters = (props) => {
 }
 
 const PageNumbers = (props) => {
-  const { page_id = '0', sort_by = 'rarity_score', order = 'desc' } = props;
   const router = useRouter();
+  const { page_id = 0 } = router.query
   return (
-    <div class="inline-flex mt-8 cursor-pointer">
+    <div className="inline-flex mt-8 cursor-pointer">
       {props.currentpage !== 0 &&
-        <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick={() => router.push(`?${json2query({ page_id: parseInt(page_id) - 1, sort_by, order })}`)}>
+        <a className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(page_id) - 1 })}`)}>
           Prev
         </a>
       }
 
-      <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick={() => router.push(`?${json2query({ page_id: parseInt(page_id) + 1, sort_by, order })}`)}>
+      <a className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(page_id) + 1 })}`)}>
         Next
       </a>
 
@@ -95,8 +98,7 @@ const PageNumbers = (props) => {
 export default function Home() {
   const router = useRouter();
   const ref = createRef(null)
-  const { page_id = '0', sort_by = 'rarity_score', order = 'desc', traits = '' } = router.query;
-  const { data, error } = useSWR(`/api/nfts?page_id=${page_id}&sort_by=${sort_by}&order=${order}${traits && `&traits=${traits}`}`, fetcher)
+  const { data, error } = useSWR(`/api/nfts?${json2query(router.query)}`, fetcher)
   const { data: filters, error: filter_error } = useSWR(`/api/filters`, fetcher)
 
   if (error) return <></>;
@@ -117,7 +119,7 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center 
       w-full flex-1 px-5 text-center mb-8">
         <Tools {...router.query} />
-        <Filters traits={Object.keys(filters)} />
+        <Filters filters={Object.keys(filters)} />
         <div className="flex flex-wrap items-center justify-evenly 
         max-w-4xl mt-6 sm:w-full">
           {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
