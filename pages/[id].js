@@ -1,8 +1,8 @@
 import { formatPrice, getDesc, ipfs2http } from '../util';
 import { FiArrowLeft } from "react-icons/fi";
 import { NextSeo } from 'next-seo';
-import { useEffect } from 'react';
 import { getNFT, getNFTInfo } from '../util/requests';
+import { useRouter } from 'next/router';
 
 
 const Trait = (attribute) => {
@@ -19,6 +19,8 @@ const Trait = (attribute) => {
 
 
 function NFT({ nft }) {
+
+  const router = useRouter();
 
   const img_url = `https://ipfs.io/ipfs/${ipfs2http(nft.image)}`;
 
@@ -44,7 +46,7 @@ function NFT({ nft }) {
         <main className="flex flex-col items-center justify-center 
         w-full flex-1 px-5 text-center mb-8 max-w-xl">
           <div className="flex mb-4 items-start w-full cursor-pointer">
-            <a className="text-2xl py-4 px-4 rounded-md bg-red-100 text-red-500" href={'/'}>
+            <a className="text-2xl py-4 px-4 rounded-md bg-red-100 text-red-500" onClick={() => router.back()}>
               <FiArrowLeft />
             </a>
           </div>
@@ -59,7 +61,7 @@ function NFT({ nft }) {
               className="rounded-md px-4 bg-black w-full"
             />
             <div className="py-4 px-2 w-full border border-4 mt-4">
-              {nft.rarity_score}
+              {nft.rarity_score.toFixed(2)}
             </div>
             <a className="py-4 px-2 w-full border border-4 mt-4" href={nft?.opensea_link}>
               Opensea Link
