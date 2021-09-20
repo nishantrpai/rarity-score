@@ -59,7 +59,7 @@ function NFT({ nft }) {
               className="rounded-md px-4 bg-black w-full"
             />
             <div className="py-4 px-2 w-full border border-4 mt-4">
-              {nft.rarity_score}
+              {nft.rarity_score.toFixed(2)}
             </div>
             <a className="py-4 px-2 w-full border border-4 mt-4" href={nft?.opensea_link}>
               Opensea Link
