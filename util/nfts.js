@@ -4,6 +4,7 @@ let nfts = require('../data/collection.json');
 const get_all_traits = (nft_arr) => {
   let all_traits = {};
   let attr_count = {}; //track attribute count of each nft
+  console.log(nft_arr.length);
   for (let i = 0; i < nft_arr.length; i++) {
     let nft = nft_arr[i];
     if (nft) {
