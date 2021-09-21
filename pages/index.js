@@ -51,29 +51,54 @@ const Tools = (props) => {
 
 const Filters = (props) => {
   const router = useRouter();
-  let { page_id = 0, sort_by = 'rarity_score', order = 'desc', traits = '' } = router.query;
-  const { filters } = props;
+  let { traits = '' } = router.query;
+  const { allTraits } = props;
+  const filters = Object.keys(allTraits);
+
   const handleChange = (e) => {
     traits = traits.split(',').filter(val => val);
     traits.push(e.target.value);
-    router.push(`?${json2query({ page_id, sort_by, order, traits })}`);
+    router.push(`?${json2query({ ...router.query, traits })}`);
   }
 
   return (
     <select onChange={handleChange}>
       {filters.map((filter, index) =>
+        <optgroup label={filter}>
+          {Object.keys(allTraits[filter]).map(val =>
+            <option
+              className={`bg-blue-100 hover:bg-blue-300 text-gray-800 py-2 px-4 w-full`}
+            >
+              {val}
+            </option>
+          )}
+        </optgroup>
+      )}
+    </select>
+  )
+}
+
+const AttrFilter = (props) => {
+  const router = useRouter();
+  let { attr_count = '' } = router.query;
+  const { attrCount } = props;
+  const filters = Object.keys(attrCount);
+  const handleChange = (e) => {
+    attr_count = e.target.value;
+    router.push(`?${json2query({ ...router.query, attr_count })}`);
+  }
+
+  return (
+    <select onChange={handleChange}>
+      {filters.map(filter =>
         <option
-          className={`bg-blue-100 hover:bg-blue-300 text-gray-800 
-          font-bold py-2 px-4 w-full 
-          ${index == 0 && 'rounded-l'}
-          ${index == (traits.length - 1) && 'rounded-r'}`}
+          className={`bg-blue-100 hover:bg-blue-300 text-gray-800 py-2 px-4 w-full`}
         >
           {filter}
         </option>
       )}
     </select>
   )
-
 }
 
 const PageNumbers = (props) => {
@@ -120,8 +145,8 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center 
       w-full flex-1 px-5 text-center mb-8">
         <Tools {...router.query} />
-        <Filters filters={Object.keys(all_traits)} />
-        <span>{JSON.stringify(attr_count)}</span>
+        <Filters allTraits={all_traits} />
+        <AttrFilter attrCount={attr_count} />
         <div className="flex flex-wrap items-center justify-evenly 
         max-w-4xl mt-6 sm:w-full">
           {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}

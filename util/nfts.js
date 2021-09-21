@@ -153,7 +153,7 @@ export const getFilters = () => {
   return { all_traits, attr_count };
 }
 
-export const filterNFT = (nft, traits) => {
+const filterNFT = (nft, traits) => {
   if (traits.length > 0) {
     let { attributes } = nft;
     let traits_count = traits.length;
@@ -174,13 +174,24 @@ export const filterNFT = (nft, traits) => {
   return true;
 }
 
-export const getNFTs = (page_id, sort_by, order, traits) => {
+const filterAttrCount = (nft, attr_count) => {
+  if (attr_count) {
+    if (nft.trait_count.count == attr_count)
+      return true;
+    else
+      return false;
+  }
+  return true;
+}
+
+export const getNFTs = (page_id, sort_by, order, traits, attr_count) => {
   let nftcollection = nfts
     .sort((x, y) =>
       order == 'asc' ?
         (x[sort_by] - y[sort_by]) :
         (y[sort_by] - x[sort_by]))
     .filter(nft => filterNFT(nft, traits))
+    .filter(nft => filterAttrCount(nft, attr_count))
     .slice(page_id * 12, ((page_id * 12) + 12))
   return nftcollection;
 }
