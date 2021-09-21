@@ -106,6 +106,7 @@ export default function Home() {
   if (!filters) return <></>
 
   const { nfts = [], collection_name } = data;
+  const { all_traits, attr_count } = filters;
 
 
   return (
@@ -119,7 +120,8 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center 
       w-full flex-1 px-5 text-center mb-8">
         <Tools {...router.query} />
-        <Filters filters={Object.keys(filters)} />
+        <Filters filters={Object.keys(all_traits)} />
+        <span>{JSON.stringify(attr_count)}</span>
         <div className="flex flex-wrap items-center justify-evenly 
         max-w-4xl mt-6 sm:w-full">
           {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}

@@ -150,8 +150,7 @@ const set_nfts_rank = () => {
 set_nfts_rank();
 
 export const getFilters = () => {
-  let filters = all_traits;
-  return filters;
+  return { all_traits, attr_count };
 }
 
 export const filterNFT = (nft, traits) => {
