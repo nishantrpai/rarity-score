@@ -23,15 +23,15 @@ export default function Home() {
 
   return (
     <div className="flex items-center justify-center 
-    min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100" ref={ref}>
+    min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100 h-full" ref={ref}>
       <Head>
         <title>{collection_name}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex justify-center w-full max-w-7xl	 flex-1 px-5 mb-8 border">
+      <main className="flex justify-center w-full max-w-7xl	 flex-1 px-5 mb-8 border h-screen">
         <SideBar all_traits={all_traits}  attr_count={attr_count} />
-        <div className="flex flex-col items-center border w-full w-5xl">
-          <div className="flex flex-wrap items-center justify-evenly w-full">
+        <div className="flex flex-col border w-full w-5xl">
+          <div className="flex flex-wrap justify-between w-full">
             {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
           </div>
           <PageNumbers {...router.query} />

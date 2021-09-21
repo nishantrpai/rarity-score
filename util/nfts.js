@@ -1,11 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 let nfts = require('../data/collection.json');
 
-const get_all_traits = (nfts) => {
+const get_all_traits = (nft_arr) => {
   let all_traits = {};
   let attr_count = {}; //track attribute count of each nft
-  for (let i = 0; i < nfts.length; i++) {
-    let nft = nfts[i];
+  for (let i = 0; i < nft_arr.length; i++) {
+    let nft = nft_arr[i];
     if (nft) {
       let { attributes } = nft;
       attributes = attributes.filter(attribute => (attribute['trait_type'] && attribute['value']))
@@ -171,7 +171,7 @@ const filterNFT = (nft, traits) => {
 }
 
 const filterAttrCount = (nft, attr_count) => {
-  if (attr_count) {
+  if (attr_count !== '') {
     if (nft.trait_count.count == attr_count)
       return true;
     else
@@ -180,11 +180,11 @@ const filterAttrCount = (nft, attr_count) => {
   return true;
 }
 
-export const getFilters = (traits, attr_count) => {
-  if (traits.length > 0 || attr_count) {
+export const getFilters = (traits, atr) => {
+  if (traits.length > 0 || atr) {
     let nftcollection = nfts
       .filter(nft => filterNFT(nft, traits))
-      .filter(nft => filterAttrCount(nft, attr_count))
+      .filter(nft => filterAttrCount(nft, atr))
 
     let { all_traits: traits_tmp, attr_count: atr_tmp } = get_all_traits(nftcollection);
     for (let i = 0; i < Object.keys(traits_tmp).length; i++) {
@@ -207,6 +207,6 @@ export const getNFTs = (page_id, sort_by, order, traits, attr_count) => {
         (y[sort_by] - x[sort_by]))
     .filter(nft => filterNFT(nft, traits))
     .filter(nft => filterAttrCount(nft, attr_count))
-    .slice(page_id * 12, ((page_id * 12) + 12))
+    .slice(page_id * 12, ((page_id * 16) + 16))
   return nftcollection;
 }
