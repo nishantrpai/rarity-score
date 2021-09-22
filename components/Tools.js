@@ -3,46 +3,45 @@ import { useRouter } from 'next/router';
 import { json2query } from '../util';
 
 export const Tools = (props) => {
-    const router = useRouter();
-    const handleChange = (e) => {
-      let option = e.target.value;
-      if (option.toLowerCase().includes('rarity')) {
-        if (option.includes('desc')) {
-          router.push(`?${json2query({ ...router.query, sort_by: 'rarity_score', order: 'desc' })}`);
-        }
-        if (option.includes('asc')) {
-          router.push(`?${json2query({ ...router.query, sort_by: 'rarity_score', order: 'asc' })}`);
-        }
+  const router = useRouter();
+  const handleChange = (option) => {
+    if (option.toLowerCase().includes('rarity')) {
+      if (option.includes('desc')) {
+        router.push(`?${json2query({ ...router.query, sort_by: 'rarity_score', order: 'desc' })}`);
       }
-  
-      if (option.toLowerCase().includes('id')) {
-        if (option.includes('desc')) {
-          router.push(`?${json2query({ ...router.query, sort_by: 'id', order: 'desc' })}`);
-        }
-        if (option.includes('asc')) {
-          router.push(`?${json2query({ ...router.query, sort_by: 'id', order: 'asc' })}`);
-        }
-  
+      if (option.includes('asc')) {
+        router.push(`?${json2query({ ...router.query, sort_by: 'rarity_score', order: 'asc' })}`);
       }
     }
-  
-    return (
-      <select onChange={handleChange} className="mb-4">
-        <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
-          🔹 Rarity desc
-        </option>
-        <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
-          🔹 Rarity asc
-        </option>
-  
-        <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
-          🏷️ ID desc
-        </option>
-        <option className="hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded-l w-full">
-          🏷️ ID asc
-        </option>
-  
-      </select>
-    )
+
+    if (option.toLowerCase().includes('id')) {
+      if (option.includes('desc')) {
+        router.push(`?${json2query({ ...router.query, sort_by: 'id', order: 'desc' })}`);
+      }
+      if (option.includes('asc')) {
+        router.push(`?${json2query({ ...router.query, sort_by: 'id', order: 'asc' })}`);
+      }
+
+    }
   }
-  
+
+  return (
+    <div onChange={handleChange} className="px-2 mt-4 text-xs">
+      <h3 className="px-2 font-bold">Sort By</h3>
+      <option className="hover:bg-gray-300 cursor-pointer text-gray-800 py-2 px-4 rounded-md w-full" onClick={() => { handleChange('rarity desc') }}>
+        🔹 Rarity desc
+      </option>
+      <option className="hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-md w-full" onClick={() => { handleChange('rarity asc') }}>
+        🔹 Rarity asc
+      </option>
+
+      <option className="hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-md w-full" onClick={() => { handleChange('id desc') }}>
+        🏷️ ID desc
+      </option>
+      <option className="hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-md w-full" onClick={() => { handleChange('id asc') }}>
+        🏷️ ID asc
+      </option>
+
+    </div>
+  )
+}

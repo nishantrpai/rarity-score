@@ -10,7 +10,7 @@ export const SideBar = (props) => {
   const { all_traits, attr_count } = props;
 
   return (
-    <div className="border h-100 max-w-xs w-full mr-2">
+    <div className="border h-100 max-h-screen overflow-auto max-w-xs w-full mr-2">
       <Tools {...router.query} />
       <Filters allTraits={all_traits} />
       <AttrFilter attrCount={attr_count} />

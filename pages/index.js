@@ -26,7 +26,7 @@ function Home({ title, img, description }) {
 
   return (
     <div className="flex flex-col items-center justify-center 
-    min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100 h-full" ref={ref}>
+    min-h-screen bg-gradient-to-r from-rose-50 to-rose-100 h-full" ref={ref}>
       <Head>
         <title>{process.env.COLLECTION_TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -47,11 +47,11 @@ function Home({ title, img, description }) {
         description={description}
       />
       <Navbar title={title} />
-      <main className="flex justify-center w-full max-w-7xl	flex-1 mb-8 border h-screen">
+      <main className="flex justify-center w-full flex-1 h-screen">
         <SideBar all_traits={all_traits} attr_count={attr_count} />
-        <div className="flex flex-col border w-full w-5xl">
+        <div className="flex flex-col w-full w-5xl">
           <TraitFilters />
-          <div className="flex flex-wrap justify-between w-full">
+          <div className="flex flex-wrap justify-start w-full">
             {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
           </div>
           <PageNumbers pages={pages} />
