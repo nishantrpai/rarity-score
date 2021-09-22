@@ -1,9 +1,11 @@
 import React from 'react';
 
-export const Navbar = ({ title }) => {
+function Navbar({ title }) {
   return (
     <div>
       <h1>{title}</h1>
     </div>
   )
 }
+
+export default Navbar;

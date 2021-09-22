@@ -7,7 +7,7 @@ import { NFT } from '../components/NFT';
 import { SideBar } from '../components/SideBar';
 import { fetcher, json2query } from '../util';
 import { PageNumbers } from '../components/PageNumbers';
-import { Navbar } from '../components/Navbar';
+import Navbar from '../components/Navbar';
 import { TraitFilters } from '../components/TraitFilters';
 
 function Home({ title, img, description }) {
