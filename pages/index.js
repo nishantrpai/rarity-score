@@ -1,13 +1,14 @@
 import Head from 'next/head'
 import React, { createRef } from 'react';
 import useSWR from 'swr'
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { NFT } from '../components/NFT';
 import { SideBar } from '../components/SideBar';
 import { fetcher, json2query } from '../util';
 import { PageNumbers } from '../components/PageNumbers';
 
-export default function Home() {
+function Home({ title, img, description }) {
   const router = useRouter();
   const ref = createRef(null)
   const { data, error } = useSWR(`/api/nfts?${json2query(router.query)}`, fetcher)
@@ -17,7 +18,7 @@ export default function Home() {
   if (!data) return <></>;
   if (!filters) return <></>
 
-  const { nfts = [], collection_name } = data;
+  const { nfts = [], pages } = data;
   const { all_traits, attr_count } = filters;
 
 
@@ -25,18 +26,39 @@ export default function Home() {
     <div className="flex items-center justify-center 
     min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100 h-full" ref={ref}>
       <Head>
-        <title>{collection_name}</title>
+        <title>{process.env.COLLECTION_TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <NextSeo
+        title={title}
+        openGraph={{
+          images: [
+            {
+              url: img
+            }
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image'
+        }}
+        description={description}
+      />
       <main className="flex justify-center w-full max-w-7xl	flex-1 mb-8 border h-screen">
-        <SideBar all_traits={all_traits}  attr_count={attr_count} />
+        <SideBar all_traits={all_traits} attr_count={attr_count} />
         <div className="flex flex-col border w-full w-5xl">
           <div className="flex flex-wrap justify-between w-full">
             {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
           </div>
-          <PageNumbers {...router.query} />
+          <PageNumbers pages={pages} />
         </div>
       </main>
     </div>
   )
 }
+
+Home.getInitialProps = () => {
+  return { title: process.env.COLLECTION_TITLE, img: process.env.COLLECTION_IMG_LINK, description: process.env.COLLECTION_DESCRIPTION };
+}
+
+export default Home;

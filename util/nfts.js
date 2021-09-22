@@ -182,20 +182,16 @@ const filterAttrCount = (nft, attr_count) => {
 }
 
 export const getFilters = (traits, atr) => {
-  if (traits.length > 0 || atr) {
-    let nftcollection = nfts
-      .filter(nft => filterNFT(nft, traits))
-      .filter(nft => filterAttrCount(nft, atr))
+  let nftcollection = nfts
+    .filter(nft => filterNFT(nft, traits))
+    .filter(nft => filterAttrCount(nft, atr))
 
-    let { all_traits: traits_tmp, attr_count: atr_tmp } = get_all_traits(nftcollection);
-    for (let i = 0; i < Object.keys(traits_tmp).length; i++) {
-      let key = Object.keys(traits_tmp)[i];
-      delete traits_tmp[key]['sum'];
-    }
-    return { all_traits: traits_tmp, attr_count: atr_tmp };
+  let { all_traits: traits_tmp, attr_count: atr_tmp } = get_all_traits(nftcollection);
+  for (let i = 0; i < Object.keys(traits_tmp).length; i++) {
+    let key = Object.keys(traits_tmp)[i];
+    delete traits_tmp[key]['sum'];
   }
-
-  return { all_traits, attr_count };
+  return { all_traits: traits_tmp, attr_count: atr_tmp };
 }
 
 
@@ -207,7 +203,10 @@ export const getNFTs = (page_id, sort_by, order, traits, attr_count) => {
         (x[sort_by] - y[sort_by]) :
         (y[sort_by] - x[sort_by]))
     .filter(nft => filterNFT(nft, traits))
-    .filter(nft => filterAttrCount(nft, attr_count))
-    .slice(page_id * 12, ((page_id * 16) + 16))
-  return nftcollection;
+    .filter(nft => filterAttrCount(nft, attr_count));
+  let nftdata = nftcollection.slice(page_id * 12, ((page_id * 12) + 12));
+  let pages = nftcollection.length / 16;
+
+
+  return { nfts: nftdata, pages };
 }
