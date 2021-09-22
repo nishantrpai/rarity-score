@@ -7,6 +7,8 @@ import { NFT } from '../components/NFT';
 import { SideBar } from '../components/SideBar';
 import { fetcher, json2query } from '../util';
 import { PageNumbers } from '../components/PageNumbers';
+import { Navbar } from '../components/Navbar';
+import { TraitFilters } from '../components/TraitFilters';
 
 function Home({ title, img, description }) {
   const router = useRouter();
@@ -23,7 +25,7 @@ function Home({ title, img, description }) {
 
 
   return (
-    <div className="flex items-center justify-center 
+    <div className="flex flex-col items-center justify-center 
     min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100 h-full" ref={ref}>
       <Head>
         <title>{process.env.COLLECTION_TITLE}</title>
@@ -44,9 +46,11 @@ function Home({ title, img, description }) {
         }}
         description={description}
       />
+      <Navbar title={title} />
       <main className="flex justify-center w-full max-w-7xl	flex-1 mb-8 border h-screen">
         <SideBar all_traits={all_traits} attr_count={attr_count} />
         <div className="flex flex-col border w-full w-5xl">
+          <TraitFilters />
           <div className="flex flex-wrap justify-between w-full">
             {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
           </div>
