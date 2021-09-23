@@ -3,7 +3,7 @@ import { FiArrowLeft } from "react-icons/fi";
 import { NextSeo } from 'next-seo';
 import { getNFT, getNFTInfo } from '../util/requests';
 import { useRouter } from 'next/router';
-
+import Navbar from '../components/Navbar';
 
 const Trait = (attribute) => {
   return (
@@ -27,7 +27,7 @@ function NFT({ nft }) {
   return (
     <>
       <div className="flex flex-col items-center justify-center 
-      min-h-screen py-2 bg-gradient-to-r from-rose-50 to-rose-100">
+      min-h-screen bg-gradient-to-r from-rose-50 to-rose-100">
         <NextSeo
           title={nft?.name}
           openGraph={{
@@ -42,11 +42,11 @@ function NFT({ nft }) {
           }}
           description={getDesc(nft)}
         />
-
+        <Navbar />
         <main className="flex flex-col items-center justify-center 
-        w-full flex-1 px-5 text-center mb-8 max-w-xl">
+        w-full flex-1 px-5 py-2 text-center mb-8 max-w-xl">
           <div className="flex mb-4 items-start w-full cursor-pointer">
-            <a className="text-2xl py-4 px-4 rounded-md bg-red-100 text-red-500" onClick={() => router.back()}>
+            <a className="text-2xl py-4 px-4 rounded-md bg-gray-200 text-gray-400 hover:text-gray-500" onClick={() => router.back()}>
               <FiArrowLeft />
             </a>
           </div>

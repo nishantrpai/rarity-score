@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { IoIosClose } from 'react-icons/io';
 import { json2query } from '../util';
 
 export const TraitFilters = () => {
@@ -20,15 +21,20 @@ export const TraitFilters = () => {
   return (
     <div className="inline-flex py-2">
       {traits.map(trait =>
-        <div className="bg-gray-100 flex border px-2 mr-2">
-          <span className="mr-4 px-4">{trait}</span>
-          <span className="text-sm cursor-pointer" onClick={() => { handleChange(trait, 'trait') }}>X</span>
+        <div className="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-indigo-100 bg-indigo-700 border border-indigo-700">
+          <span className="mr-4 text-xs">{trait}</span>
+          <span className="cursor-pointer" onClick={() => { handleChange(trait, 'trait') }}>
+            <IoIosClose />
+          </span>
         </div>
       )}
-      {attr_count && <div className="bg-gray-100 flex border px-2 mr-2">
-        <span className="mr-4 px-4">Attr Count:{attr_count}</span>
-        <span className="text-sm cursor-pointer" onClick={() => { handleChange(attr_count, 'attr') }}>X</span>
-      </div>}
+      {attr_count &&
+        <div className="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-indigo-100 bg-indigo-700 border border-indigo-700">
+          <span className="mr-4 text-xs">Attr Count:{attr_count}</span>
+          <span className="cursor-pointer hover:text-indigo-200" onClick={() => { handleChange(attr_count, 'attr') }}>
+            <IoIosClose />
+          </span>
+        </div>}
 
     </div>
   )

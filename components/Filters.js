@@ -16,7 +16,7 @@ export const Filters = (props) => {
   }
 
   return (
-    <div className="max-w-sm w-full text-xs" onChange={handleChange}>
+    <div className="max-w-sm w-full text-xs mt-4" onChange={handleChange}>
       {filters.map((filter, index) =>
         <div className="w-full">
           <h2 className="font-bold px-2">{filter}</h2>
