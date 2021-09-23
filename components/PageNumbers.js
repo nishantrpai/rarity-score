@@ -30,7 +30,7 @@ export const PageNumbers = (props) => {
         </a>
 
         {end.map(val =>
-          <a className="bg-gray-300 mr-4 hover:bg-gray-400 text-gray-800 font-bold py-2 px-2 rounded-md" onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(val) })}`)}>
+          <a className="bg-gray-300 mr-4 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md" onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(val) })}`)}>
             {val}
           </a>
         )}
@@ -42,7 +42,7 @@ export const PageNumbers = (props) => {
     return (
       <>
         {pageElems.map(val =>
-          <a className="bg-gray-300 mr-4 hover:bg-gray-400 text-gray-800 font-bold py-2 px-2 rounded-md"
+          <a className="bg-gray-200 mr-4 hover:bg-gray-400 text-gray-800 font-bold py-2 px-2 rounded-md"
             onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(val) })}`)}>
             {val}
           </a>
@@ -52,7 +52,7 @@ export const PageNumbers = (props) => {
   }
 
   return (
-    <div className="flex mt-8 cursor-pointer">
+    <div className="flex mt-8 cursor-pointer text-xs">
       {pageElems.length > 5 ? manyPages() : fewPages()}
     </div>
   );

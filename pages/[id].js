@@ -27,7 +27,7 @@ function NFT({ nft }) {
   return (
     <>
       <div className="flex flex-col items-center justify-center 
-      min-h-screen bg-gradient-to-r from-rose-50 to-rose-100">
+      min-h-screen bg-gray-200">
         <NextSeo
           title={nft?.name}
           openGraph={{
@@ -43,33 +43,36 @@ function NFT({ nft }) {
           description={getDesc(nft)}
         />
         <Navbar />
+        <div className="flex mb-4 items-start w-full cursor-pointer">
+          <a className="text-2xl py-4 px-4 rounded-md bg-gray-200 text-gray-400 hover:text-gray-500 m-4" onClick={() => router.back()}>
+            <FiArrowLeft />
+          </a>
+        </div>
+
         <main className="flex flex-col items-center justify-center 
-        w-full flex-1 px-5 py-2 text-center mb-8 max-w-xl">
-          <div className="flex mb-4 items-start w-full cursor-pointer">
-            <a className="text-2xl py-4 px-4 rounded-md bg-gray-200 text-gray-400 hover:text-gray-500" onClick={() => router.back()}>
-              <FiArrowLeft />
-            </a>
-          </div>
+        w-full flex-1 p-2 rounded-lg text-center mb-8 max-w-xl">
           <div
-            className="justify-center"
+            className="justify-center border p-4 shadow-xl rounded-md bg-white"
           >
             <h3 className="text-3xl font-semibold mb-4">
               {nft?.name}
             </h3>
-            <img
-              src={img_url}
-              className="rounded-md px-4 bg-black w-full"
-            />
+            <div className="relative rounded-md px-4 bg-black w-full">
+              <img
+                src={img_url}
+              />
+              <span className="absolute top-5 right-5
+              text-white px-4 py-2 font-bold text-lg rounded-md bg-yellow-100 text-yellow-700">
+                {nft.rarity_rank + 1}
+              </span>
+            </div>
             <div className="py-4 px-2 w-full border border-4 mt-4">
               {nft.rarity_score.toFixed(2)}
             </div>
-            <div className="py-4 px-2 w-full border border-4 mt-4">
-              {nft.rarity_rank}
-            </div>
-            <a className="py-4 px-2 w-full border border-4 mt-4" href={nft?.opensea_link}>
+            <a className="py-4 px-2 flex w-full border border-4 mt-4" href={nft?.opensea_link}>
               Opensea Link
             </a>
-            <div className="py-4">
+            <div className="py-4 flex flex-col">
               {nft.current_price !== '-' && <span>{`Ξ${formatPrice(nft?.current_price)}`}</span>}
               {nft?.attributes?.map((attribute, idx) => <Trait key={idx} {...attribute} />)}
               {nft?.missing_traits?.map((attribute, idx) => <Trait key={idx * 100} {...attribute} />)}

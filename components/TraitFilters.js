@@ -22,7 +22,7 @@ export const TraitFilters = () => {
     <div className="inline-flex py-2">
       {traits.map(trait =>
         <div className="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-indigo-100 bg-indigo-700 border border-indigo-700">
-          <span className="mr-4 text-xs">{trait}</span>
+          <span className="text-xs">{trait}</span>
           <span className="cursor-pointer" onClick={() => { handleChange(trait, 'trait') }}>
             <IoIosClose />
           </span>
@@ -30,7 +30,7 @@ export const TraitFilters = () => {
       )}
       {attr_count &&
         <div className="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-indigo-100 bg-indigo-700 border border-indigo-700">
-          <span className="mr-4 text-xs">Attr Count:{attr_count}</span>
+          <span className="text-xs">Attr Count: {attr_count}</span>
           <span className="cursor-pointer hover:text-indigo-200" onClick={() => { handleChange(attr_count, 'attr') }}>
             <IoIosClose />
           </span>

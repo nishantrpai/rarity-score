@@ -49,7 +49,7 @@ function Home({ title, img, description }) {
       <Navbar title={title} />
       <main className="flex justify-center w-full flex-1 h-screen">
         <SideBar all_traits={all_traits} attr_count={attr_count} />
-        <div className="flex flex-col w-full w-5xl">
+        <div className="flex flex-col w-full w-5xl px-4 bg-gradient-to-r from-red-100 to-red-100">
           <TraitFilters />
           <div className="flex flex-wrap justify-start w-full">
             {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
