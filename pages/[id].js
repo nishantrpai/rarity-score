@@ -7,12 +7,14 @@ import Navbar from '../components/Navbar';
 
 const Trait = (attribute) => {
   return (
-    <div className="flex">
-      <span>{attribute.trait_type} | </span>
-      <span>{attribute.value} | </span>
-      <span>{attribute.percentile} | </span>
-      <span>{attribute.count} | </span>
-      <span>{attribute.rarity_score?.toFixed(2)}</span>
+    <div className="flex flex-col justify-start">
+      <span className="text-xs">{attribute.trait_type.toUpperCase()} </span>
+      <div>
+        <span>{attribute.value} | </span>
+        {/* <span>{attribute.percentile} | </span> */}
+        <span>{attribute.count} | </span>
+        <span>{attribute.rarity_score?.toFixed(2)}</span>
+      </div>
     </div>
   )
 }
@@ -44,7 +46,7 @@ function NFT({ nft }) {
         />
         <Navbar />
         <div className="flex mb-4 items-start w-full cursor-pointer">
-          <a className="text-2xl py-4 px-4 rounded-md bg-gray-200 text-gray-400 hover:text-gray-500 m-4" onClick={() => router.back()}>
+          <a className="text-2xl py-4 px-4 rounded-md bg-gray-200 text-gray-700 hover:text-gray-900 m-4" onClick={() => router.back()}>
             <FiArrowLeft />
           </a>
         </div>
@@ -62,19 +64,25 @@ function NFT({ nft }) {
                 src={img_url}
               />
               <span className="absolute top-5 right-5
-              text-white px-4 py-2 font-bold text-lg rounded-md bg-yellow-100 text-yellow-700">
-                {nft.rarity_rank + 1}
+              text-white px-4 py-2 font-medium text-lg rounded-md bg-yellow-100 text-yellow-600">
+                #{nft.rarity_rank + 1}
               </span>
             </div>
-            <div className="py-4 px-2 w-full border border-4 mt-4">
-              {nft.rarity_score.toFixed(2)}
+            <div className="py-4 px-2 w-full rounded-md text-lg mt-4 bg-red-100 text-red-500">
+              ♦️ {nft.rarity_score.toFixed(2)}
             </div>
-            <a className="py-4 px-2 flex w-full border border-4 mt-4" href={nft?.opensea_link}>
-              Opensea Link
+            {nft.current_price !== '-' &&
+              <div className="py-4 px-2 w-full rounded-md text-lg mt-4 bg-green-100 text-green-500">
+                <span>{`Ξ ${formatPrice(nft?.current_price)}`}</span>
+              </div>
+            }
+
+            <a className="py-4 px-2 flex text-center w-full items-center justify-center mt-4 bg-blue-100 text-blue-500" href={nft?.opensea_link} target='_blank'>
+              🛒 Opensea Link
             </a>
-            <div className="py-4 flex flex-col">
-              {nft.current_price !== '-' && <span>{`Ξ${formatPrice(nft?.current_price)}`}</span>}
+            <div className="py-4 flex flex-col items-start justify-start">
               {nft?.attributes?.map((attribute, idx) => <Trait key={idx} {...attribute} />)}
+              <span>Missing Traits</span>
               {nft?.missing_traits?.map((attribute, idx) => <Trait key={idx * 100} {...attribute} />)}
             </div>
           </div>
