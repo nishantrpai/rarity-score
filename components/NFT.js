@@ -7,7 +7,7 @@ export const NFT = (nft) => {
       <a
         className="mb-6 text-left w-24
         cursor-pointer rounded-md shadow-xs
-        mr-4 hover:underline text-center"
+        mr-4 mb-4 hover:underline text-center"
         href={`/${nft.id}`}
       >
         <img
