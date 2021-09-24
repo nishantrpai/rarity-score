@@ -120,12 +120,17 @@ const calculate_nft_rarity = (nft) => {
   nft['rarity_score'] += nft['trait_count']['rarity_score'];
 }
 
+const filter_nft_attributes = (nft) => {
+  nft['attributes'] = nft['attributes'].filter(attribute => attribute['trait_type'] && attribute['value']);
+}
+
 export const getNFT = (id) => {
   // Retrieve nft for id
   // Precompute the frequency of each trait
   nfts = nfts.sort((x, y) => x['id'] - y['id']);
   let nft = nfts[id];
   if (nft) {
+    filter_nft_attributes(nft);
     set_trait_rarity(nft, all_traits);
     set_nft_rarity(nft, all_traits);
     calculate_attribute_rarity(nft);
