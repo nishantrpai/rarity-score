@@ -7,13 +7,15 @@ import Navbar from '../components/Navbar';
 
 const Trait = (attribute) => {
   return (
-    <div className="flex flex-col justify-start">
-      <span className="text-xs">{attribute.trait_type.toUpperCase()} </span>
-      <div>
-        <span>{attribute.value} | </span>
+    <div className="flex flex-col justify-start w-full mb-4 p-2">
+      <div className="flex justify-between w-full text-xs mb-2">
+        <span className="text-gray-500">{attribute?.trait_type.toUpperCase()} </span>
+        <span className="text-red-500 font-bold">+{attribute.rarity_score?.toFixed(2)}</span>
+      </div>
+      <div className="flex justify-between w-full text-xs text-gray-700">
+        <span>{attribute.value ? attribute.value : '-'}  </span>
         {/* <span>{attribute.percentile} | </span> */}
-        <span>{attribute.count} | </span>
-        <span>{attribute.rarity_score?.toFixed(2)}</span>
+        <span className="font-bold">{attribute.count}</span>
       </div>
     </div>
   )
@@ -29,7 +31,7 @@ function NFT({ nft }) {
   return (
     <>
       <div className="flex flex-col items-center justify-center 
-      min-h-screen bg-gray-200">
+      min-h-screen bg-gray-100">
         <NextSeo
           title={nft?.name}
           openGraph={{
@@ -54,7 +56,7 @@ function NFT({ nft }) {
         <main className="flex flex-col items-center justify-center 
         w-full flex-1 p-2 rounded-lg text-center mb-8 max-w-xl">
           <div
-            className="justify-center border p-4 shadow-xl rounded-md bg-white"
+            className="justify-center border p-4 shadow-xl rounded-md bg-white border border-gray-300"
           >
             <h3 className="text-3xl font-semibold mb-4">
               {nft?.name}
@@ -81,8 +83,9 @@ function NFT({ nft }) {
               🛒 Opensea Link
             </a>
             <div className="py-4 flex flex-col items-start justify-start">
+              {/* <h2 className="px-2 text-xl mb-2 font-bold text-gray-800">Traits</h2> */}
               {nft?.attributes?.map((attribute, idx) => <Trait key={idx} {...attribute} />)}
-              <span>Missing Traits</span>
+              {/* <h2 className="px-2 text-xl mb-2 font-bold text-gray-800">Missing Traits</h2> */}
               {nft?.missing_traits?.map((attribute, idx) => <Trait key={idx * 100} {...attribute} />)}
             </div>
           </div>
