@@ -13,16 +13,18 @@ export const AttrFilter = (props) => {
   }
 
   return (
-    <div className="text-xs" onChange={handleChange}>
-      <h3 className="font-bold px-2">Attributes</h3>
-      {filters.map(filter =>
-        <option
-          className={`bg-gray-100 hover:bg-gray-300 cursor-pointer text-gray-800 py-2 px-4 w-full`}
-          onClick={() => handleChange(filter)}
-        >
-          {filter} ({attrCount[filter]})
-        </option>
-      )}
+    <div className="text-xs mt-4" onChange={handleChange}>
+      <h3 className="font-bold px-2 text-gray-700 uppercase mb-2">Attributes</h3>
+      <div className="px-2">
+        {filters.map(filter =>
+          <a
+            className={`bg-white hover:bg-gray-300 rounded-md cursor-pointer text-gray-800 py-2 px-1 w-full flex`}
+            onClick={() => handleChange(filter)}
+          >
+            {filter} ({attrCount[filter]})
+          </a>
+        )}
+      </div>
     </div>
   )
 }

@@ -66,7 +66,7 @@ function NFT({ nft }) {
                 src={img_url}
               />
               <span className="absolute top-5 right-5
-              text-white px-4 py-2 font-medium text-lg rounded-md bg-yellow-100 text-yellow-600">
+              text-white px-2 py-2 font-medium text-xs rounded-md bg-yellow-100 text-yellow-600">
                 #{nft.rarity_rank + 1}
               </span>
             </div>

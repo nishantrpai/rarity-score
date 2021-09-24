@@ -6,13 +6,13 @@ export const NFT = (nft) => {
     <>
       <a
         className="mb-6 text-left w-24
-        cursor-pointer rounded-md shadow-xs hover:shadow-md
-        bg-white mr-4 hover:underline"
+        cursor-pointer rounded-md shadow-xs
+        mr-4 hover:underline text-center"
         href={`/${nft.id}`}
       >
         <img
           src={`https://ipfs.io/ipfs/${ipfs2http(nft.image)}`}
-          className="rounded-t-md px-2 h-auto bg-black" />
+          className="rounded-md px-2 pt-2 h-auto bg-black" />
         <div className="rounded-b-md py-2 px-2">
           <h3 className="text-xs text-gray-600">#{nft.id}</h3>
         </div>

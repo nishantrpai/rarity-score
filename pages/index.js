@@ -7,6 +7,7 @@ import { NFT } from '../components/NFT';
 import { SideBar } from '../components/SideBar';
 import { fetcher, json2query } from '../util';
 import { PageNumbers } from '../components/PageNumbers';
+import { Loading } from '../components/Loading';
 import Navbar from '../components/Navbar';
 import { TraitFilters } from '../components/TraitFilters';
 
@@ -17,7 +18,7 @@ function Home({ title, img, description }) {
   const { data: filters, error: filter_error } = useSWR(`/api/filters?${json2query(router.query)}`, fetcher)
 
   if (error) return <></>;
-  if (!data) return <></>;
+  if (!data) return <Loading />;
   if (!filters) return <></>
 
   const { nfts = [], pages } = data;
@@ -49,7 +50,7 @@ function Home({ title, img, description }) {
       <Navbar title={title} />
       <main className="flex justify-center w-full flex-1 h-screen">
         <SideBar all_traits={all_traits} attr_count={attr_count} />
-        <div className="flex flex-col w-full w-5xl px-4 bg-gradient-to-r from-red-100 to-red-100">
+        <div className="flex flex-col w-full w-5xl px-4">
           <TraitFilters />
           <div className="flex flex-wrap justify-start w-full">
             {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
