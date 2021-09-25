@@ -7,6 +7,7 @@ export const Tools = (props) => {
   const router = useRouter();
   const { sort_by, order } = router.query;
   const handleChange = (option) => {
+    props.setShowMenu(false);
     if (option.toLowerCase().includes('rarity')) {
       if (option.includes('desc')) {
         router.push(`?${json2query({ ...router.query, sort_by: 'rarity_score', order: 'desc' })}`);

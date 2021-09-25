@@ -9,6 +9,7 @@ export const AttrFilter = (props) => {
   const filters = Object.keys(attrCount);
 
   const handleChange = (attr_count) => {
+    props.setShowMenu(false);
     router.push(`?${json2query({ ...router.query, attr_count })}`);
   }
 

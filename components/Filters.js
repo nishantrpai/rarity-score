@@ -10,9 +10,10 @@ export const Filters = (props) => {
   const filters = Object.keys(allTraits);
 
   const handleChange = (trait) => {
+    props.setShowMenu(false);
     traits = traits.split(',').filter(val => val);
     traits.push(trait);
-    router.push(`?${json2query({ ...router.query, traits })}`);
+    router.push(`?${json2query({ ...router.query, traits, page_id: 0 })}`);
   }
 
   return (

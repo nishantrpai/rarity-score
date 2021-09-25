@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React, { createRef } from 'react';
+import React, { createRef, useState } from 'react';
 import useSWR from 'swr'
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -14,6 +14,7 @@ import { TraitFilters } from '../components/TraitFilters';
 function Home({ title, img, description }) {
   const router = useRouter();
   const ref = createRef(null)
+  const [showMenu, setShowMenu] = useState(false)
   const { data, error } = useSWR(`/api/nfts?${json2query(router.query)}`, fetcher)
   const { data: filters, error: filter_error } = useSWR(`/api/filters?${json2query(router.query)}`, fetcher)
 
@@ -47,10 +48,11 @@ function Home({ title, img, description }) {
         }}
         description={description}
       />
-      <Navbar title={title} />
-      <main className="flex justify-center w-full flex-1 h-screen">
-        <SideBar all_traits={all_traits} attr_count={attr_count} />
+      <Navbar title={title} menu={true} setShowMenu={setShowMenu} showMenu={showMenu} />
+      <main className="relative flex justify-center w-full flex-1 h-screen">
+        <SideBar all_traits={all_traits} attr_count={attr_count} showMenu={showMenu} setShowMenu={setShowMenu} />
         <div className="flex flex-col w-full w-5xl px-4">
+          {showMenu}
           <TraitFilters />
           <div className="flex flex-wrap justify-between sm:justify-start max-w-5xl w-full">
             {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
