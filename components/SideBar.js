@@ -10,7 +10,7 @@ export const SideBar = (props) => {
   const { all_traits, attr_count } = props;
 
   return (
-    <div className="border h-50 max-h-screen overflow-auto max-w-xs w-full bg-white">
+    <div className="hidden sm:block border h-50 max-h-screen overflow-auto max-w-xs w-full bg-white">
       <Tools {...router.query} />
       <Filters allTraits={all_traits} />
       <AttrFilter attrCount={attr_count} />

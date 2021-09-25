@@ -52,7 +52,7 @@ function Home({ title, img, description }) {
         <SideBar all_traits={all_traits} attr_count={attr_count} />
         <div className="flex flex-col w-full w-5xl px-4">
           <TraitFilters />
-          <div className="flex flex-wrap justify-start w-full">
+          <div className="flex flex-wrap justify-between sm:justify-start max-w-5xl w-full">
             {nfts.map((nft, idx) => <NFT {...nft} index={idx} />)}
           </div>
           <PageNumbers pages={pages} />

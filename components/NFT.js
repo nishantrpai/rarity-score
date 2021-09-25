@@ -5,9 +5,9 @@ export const NFT = (nft) => {
   return (
     <>
       <a
-        className="mb-6 text-left w-24
+        className="text-left w-16 sm:w-24
         cursor-pointer rounded-md shadow-xs
-        mr-4 mb-4 hover:underline text-center"
+        mr-3 sm:mr-4 hover:underline text-center"
         href={`/${nft.id}`}
       >
         <img

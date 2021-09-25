@@ -209,8 +209,8 @@ export const getNFTs = (page_id, sort_by, order, traits, attr_count) => {
         (y[sort_by] - x[sort_by]))
     .filter(nft => filterNFT(nft, traits))
     .filter(nft => filterAttrCount(nft, attr_count));
-  let nftdata = nftcollection.slice(page_id * 78, ((page_id * 78) + 78));
-  let pages = nftcollection.length / 16;
+  let nftdata = nftcollection.slice(page_id * 24, ((page_id * 24) + 24));
+  let pages = nftcollection.length / 24;
 
 
   return { nfts: nftdata, pages };

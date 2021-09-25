@@ -15,7 +15,7 @@ export const PageNumbers = (props) => {
   const manyPages = () => {
     return (
       <>
-        <a className="bg-gray-300 mr-4 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md =" onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(0) })}`)}>
+        <a className="block sm:hidden bg-gray-300 mr-4 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md =" onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(0) })}`)}>
           🏠
         </a>
 
@@ -25,12 +25,12 @@ export const PageNumbers = (props) => {
           </a>
         )}
 
-        <a className="mr-4 text-gray-800 font-bold py-2 px-4">
+        <a className="hidden sm:block block sm:hidden mr-4 text-gray-800 font-bold py-2 px-4">
           ...
         </a>
 
         {end.map(val =>
-          <a className="bg-gray-300 mr-4 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md" onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(val) })}`)}>
+          <a className="hidden sm:block bg-gray-300 mr-4 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md" onClick={() => router.push(`?${json2query({ ...router.query, page_id: parseInt(val) })}`)}>
             {val}
           </a>
         )}
