@@ -31,7 +31,7 @@ function Home({ title, img, description }) {
     <div className="flex flex-col items-center justify-center 
     min-h-screen bg-gradient-to-r from-rose-50 to-rose-100 h-full" ref={ref}>
       <Head>
-        <title>{config.COLLECTION_TITLE}</title>
+        <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
