@@ -10,6 +10,7 @@ import { PageNumbers } from '../components/PageNumbers';
 import { Loading } from '../components/Loading';
 import Navbar from '../components/Navbar';
 import { TraitFilters } from '../components/TraitFilters';
+import { config } from '../config';
 
 function Home({ title, img, description }) {
   const router = useRouter();
@@ -30,7 +31,7 @@ function Home({ title, img, description }) {
     <div className="flex flex-col items-center justify-center 
     min-h-screen bg-gradient-to-r from-rose-50 to-rose-100 h-full" ref={ref}>
       <Head>
-        <title>{process.env.COLLECTION_TITLE}</title>
+        <title>{config.COLLECTION_TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -65,7 +66,7 @@ function Home({ title, img, description }) {
 }
 
 Home.getInitialProps = () => {
-  return { title: process.env.COLLECTION_TITLE, img: process.env.COLLECTION_IMG_LINK, description: process.env.COLLECTION_DESCRIPTION };
+  return { title: config.COLLECTION_TITLE, img: config.COLLECTION_IMG_LINK, description: config.COLLECTION_DESCRIPTION };
 }
 
 export default Home;
