@@ -53,10 +53,10 @@ yarn install
 - Change the JSON in `data/collection.json` to your collection.json. If there is an error, raise it as an issue. JSON follows [opensea standards](https://docs.opensea.io/docs/metadata-standards)
 
 - Change `config/index.js`:
-  - API_URL: Your vercel URL (when you deploy) or `localhost:3000` if you want to use it locally
-  - COLLECTION_NAME: Opensea collection name "OneDayPunks" is an example
-  - COLLECTION_TITLE: This is for the website title (for SEO)
-  - COLLECTION_DESCRIPTION: og:description (for SEO)
-  - COLLECTION_IMG_LINK: og:image for website (for SEO)
+  - `API_URL`: Your vercel URL (when you deploy) or `localhost:3000` if you want to use it locally
+  - `COLLECTION_NAME`: Opensea collection name "OneDayPunks" is an example
+  - `COLLECTION_TITLE`: This is for the website title (for SEO)
+  - `COLLECTION_DESCRIPTION`: og:description (for SEO)
+  - `COLLECTION_IMG_LINK`: og:image for website (for SEO)
 
 [Reference for SEO](https://www.heymeta.com/url/odp-rarity.vercel.app)
