@@ -40,6 +40,8 @@ Who is this project for and what are their needs?
 - Share NFT for `token_id`: Display rarity score, rarity rank and price (useful for buyers)
 - If you deploy using Vercel, changes are deployed automatically.
 
+PS: All webpages are responsive
+
 # How to use
 
 Once you have deployed, you need to change the following for your use:
@@ -60,3 +62,8 @@ yarn install
   - `COLLECTION_IMG_LINK`: og:image for website (for SEO)
 
 [Reference for SEO](https://www.heymeta.com/url/odp-rarity.vercel.app)
+
+# Stack
+
+- [Next.js](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/)
