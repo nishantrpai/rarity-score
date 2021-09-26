@@ -1,4 +1,4 @@
-# Punkscape Hackathon
+# Rarity Score Template
 
 Implement your own rarity tools using this template.
 
