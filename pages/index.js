@@ -1,15 +1,13 @@
 import Head from "next/head";
 import React, { createRef, useState } from "react";
-import useSWR from "swr";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { NFT } from "../components/NFT";
 import { SideBar } from "../components/SideBar";
-import { fetcher, json2query } from "../util";
 import { PageNumbers } from "../components/PageNumbers";
-import { Loading } from "../components/Loading";
 import Navbar from "../components/Navbar";
 import { TraitFilters } from "../components/TraitFilters";
+import { Footer } from "../components/Footer";
 import { config } from "../config";
 import { getFilters, getNFTs } from "../util/requests";
 
@@ -69,6 +67,7 @@ function Home({ title, img, description, nfts, pages, filters }) {
           <PageNumbers pages={pages} />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
@@ -78,8 +77,8 @@ Home.getInitialProps = async ({ query }) => {
   let filters = await getFilters(query);
   return {
     title: config.COLLECTION_TITLE,
-    img: config.COLLECTION_IMG_LINK,
     description: config.COLLECTION_DESCRIPTION,
+    img: config.COLLECTION_IMG_LINK,
     nfts,
     pages,
     filters,
