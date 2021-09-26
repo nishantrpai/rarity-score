@@ -5,7 +5,7 @@ import { json2query } from "../util";
 
 export const Tools = (props) => {
   const router = useRouter();
-  const { sort_by, order } = router.query;
+  const { sort_by = "rarity_score", order = "desc" } = router.query;
   const handleChange = (option) => {
     props.setShowMenu(false);
     if (option.toLowerCase().includes("rarity")) {
@@ -81,7 +81,7 @@ export const Tools = (props) => {
           }}
         >
           <span className="text-xs">
-            <ImSortNumbericDesc />
+            <ImSortNumericAsc />
           </span>
           <span className="text-xs">&nbsp;&nbsp;Rarity</span>
         </a>

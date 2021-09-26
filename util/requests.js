@@ -2,14 +2,14 @@ import { json2query } from ".";
 import { config } from "../config";
 
 export const getNFT = async (id) => {
-  const res = await fetch(`http://${config.API_URL}/api/nft?id=${id}`);
+  const res = await fetch(`https://${config.API_URL}/api/nft?id=${id}`);
   const data = await res.json();
   return data;
 };
 
 export const getNFTs = async (query) => {
   const res = await fetch(
-    `http://${config.API_URL}/api/nfts?${json2query(query)}`
+    `https://${config.API_URL}/api/nfts?${json2query(query)}`
   );
   const data = await res.json();
   return data;
@@ -17,7 +17,7 @@ export const getNFTs = async (query) => {
 
 export const getFilters = async (query) => {
   const res = await fetch(
-    `http://${config.API_URL}/api/filters?${json2query(query)}`
+    `https://${config.API_URL}/api/filters?${json2query(query)}`
   );
   const data = await res.json();
   return data;

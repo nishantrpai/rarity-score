@@ -40,6 +40,7 @@ function Home({ title, img, description, nfts, pages, filters }) {
           ],
         }}
         twitter={{
+          image: img,
           cardType: "summary_large_image",
         }}
         description={description}
