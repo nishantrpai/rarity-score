@@ -23,7 +23,7 @@ export const Search = (props) => {
         minLength={2}
         debounceTimeout={300}
         className="bg-gray-200 p-2 hover:bg-gray-100 rounded-md w-full text-xs"
-        placeholder="🔍 Search by token id"
+        placeholder="🔍 Search by token id e.g., 4003"
         onChange={handleChange}
       />
     </div>
