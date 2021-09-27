@@ -216,8 +216,11 @@ export const getFilters = (traits, atr) => {
 };
 
 export const filterNFTQuery = (nft, query) => {
-  if (nft.id.toString().includes(query)) return true;
-  return false;
+  if (query) {
+    if (nft.id.toString().includes(query)) return true;
+    return false;
+  }
+  return true;
 };
 
 export const getNFTs = (page_id, sort_by, order, traits, attr_count, query) => {
