@@ -1,4 +1,6 @@
 export const config = {
+  env: "prod",
+  LOCAL_API_URL: "localhost:3000",
   API_URL: "odp-rarity.vercel.app",
   COLLECTION_NAME: "OneDayPunks",
   COLLECTION_TITLE: "One Day Punks",
