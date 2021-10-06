@@ -1,16 +1,15 @@
 export const getDesc = (nft) => {
   let desc;
   desc = `
-  <br/>
-  🔷<b>ID</b>: ${nft.id}
-  <br/>
-  🔷<b>Rarity score</b>: ${nft.rarity_score.toFixed(2)}
-  <br/>
-  🔷<b>Rarity rank</b>: ${nft.rarity_rank + 1}
-  <br/>
+  🔷ID: ${nft.id}
+  
+  🔷Rarity score: ${nft.rarity_score.toFixed(2)}
+  
+  🔷Rarity rank: ${nft.rarity_rank + 1}
+  
   ${
     nft.current_price !== "-"
-      ? `🔷<b>Price</b>: Ξ${formatPrice(nft.current_price)}`
+      ? `🔷Price: Ξ${formatPrice(nft.current_price)}`
       : ""
   }
   `;
