@@ -48,13 +48,14 @@ Once you have deployed, you need to change the following for your use:
 
 Using locally:
 
+1. Install packages
 ```
 yarn install
 ```
 
-- Change the JSON in `data/collection.json` to your collection.json. If there is an error, raise it as an issue. JSON follows [opensea standards](https://docs.opensea.io/docs/metadata-standards)
+2. Change the JSON in `data/collection.json` to your collection.json. If there is an error, raise it as an issue. JSON follows [opensea standards](https://docs.opensea.io/docs/metadata-standards)
 
-- Change `config/index.js`:
+3. Change `config/index.js`:
   - `env` : If you're using locally set it to `local`, while deploying set it to `prod`.
   - `LOCAL_API_URL`: Port at which app is running locally. Default value of `http://localhost:3000`
   - `API_URL`: Your vercel URL (when you deploy)
@@ -64,6 +65,13 @@ yarn install
   - `COLLECTION_IMG_LINK`: og:image for website (for SEO)
 
 [Reference for SEO](https://www.heymeta.com/url/odp-rarity.vercel.app)
+
+4. Running it locally
+
+```
+yarn run dev
+```
+
 
 # Stack
 
