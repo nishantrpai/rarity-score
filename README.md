@@ -77,3 +77,8 @@ yarn run dev
 
 - [Next.js](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/)
+
+# Donate
+
+Solana: 9dPN7gdN9cyGhjiQn5gBU9DQDBxUJafvS873BcW3mpFT
+Ethereum: 0x5A8064F8249D079f02bfb688f4AA86B6b2C65359
