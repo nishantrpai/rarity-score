@@ -86,13 +86,15 @@ function NFT({ nft, title }) {
               </div>
             )}
 
-            <a
-              className="py-4 px-2 flex text-center w-full items-center justify-center mt-4 bg-blue-100 text-blue-500"
-              href={nft?.external_url}
-              target="_blank"
-            >
-              🛒 Visit gallery
-            </a>
+            {nft?.external_url && (
+              <a
+                className="py-4 px-2 flex text-center w-full items-center justify-center mt-4 bg-blue-100 text-blue-500"
+                href={nft?.external_url}
+                target="_blank"
+              >
+                🛒 Visit gallery
+              </a>
+            )}
             <div className="py-4 flex flex-col items-start justify-start">
               {/* <h2 className="px-2 text-xl mb-2 font-bold text-gray-800">Traits</h2> */}
               {nft?.attributes?.map((attribute, idx) => (
