@@ -88,10 +88,10 @@ function NFT({ nft, title }) {
 
             <a
               className="py-4 px-2 flex text-center w-full items-center justify-center mt-4 bg-blue-100 text-blue-500"
-              href={nft?.opensea_link}
+              href={nft?.external_url}
               target="_blank"
             >
-              🛒 Opensea
+              🛒 Visit gallery
             </a>
             <div className="py-4 flex flex-col items-start justify-start">
               {/* <h2 className="px-2 text-xl mb-2 font-bold text-gray-800">Traits</h2> */}
@@ -113,12 +113,12 @@ function NFT({ nft, title }) {
 
 NFT.getInitialProps = async ({ query }) => {
   let nft = await getNFT(query.id);
-  let opensea_info = await getNFTInfo(query.id);
-  nft["opensea_link"] = opensea_info["assets"][0]["permalink"];
+  // let opensea_info = await getNFTInfo(query.id);
+  // nft["opensea_link"] = opensea_info["assets"][0]["permalink"];
   nft["current_price"] = "-";
-  if (opensea_info["assets"][0]["sell_orders"])
-    nft["current_price"] =
-      opensea_info["assets"][0]["sell_orders"][0]["current_price"]; //last price
+  // if (opensea_info["assets"][0]["sell_orders"])
+  //   nft["current_price"] =
+  //     opensea_info["assets"][0]["sell_orders"][0]["current_price"]; //last price
   if (nft) return { nft, title: config.COLLECTION_TITLE };
   else return { nft: {}, title: config.COLLECTION_TITLE };
 };

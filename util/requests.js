@@ -6,8 +6,6 @@ let basePath =
     ? `http://${config.LOCAL_API_URL}`
     : `https://${config.API_URL}`;
 
-console.log(basePath);
-
 export const getNFT = async (id) => {
   const res = await fetch(`${basePath}/api/nft?id=${id}`);
   const data = await res.json();
