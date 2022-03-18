@@ -74,14 +74,14 @@ yarn run dev
 
 # 😫 Don't feel like it?
 
-Reach out to me on [Twitter](https://twitter.com/PaiNishant) or [Discord](nishu#4633), will deploy it for you.
+Reach out to me on [Twitter](https://twitter.com/PaiNishant) or [Discord](https://discordapp.com/users/nishu#4633), will deploy it for you.
 
 PS: This is a paid service.
 
 ## 🧾 Have I done it before?
 
 Yes, deployed it for:
-- [Larp Island](https://larpisland.vercel.app): Took me 1 day, there were issues in metadata/codebase. Fixed all of them. [Proof] (https://etherscan.io/tx/0xe40e628eca5997f5194b371369a64c7e40a12786cb54d9037e853560bfa5a2e5)
+- [Larp Island](https://larpisland.vercel.app): Took me 1 day, there were issues in metadata/codebase. Fixed all of them. [Transaction Proof](https://etherscan.io/tx/0xe40e628eca5997f5194b371369a64c7e40a12786cb54d9037e853560bfa5a2e5)
 
 *will add testimonial*
 
