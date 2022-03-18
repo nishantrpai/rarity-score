@@ -72,6 +72,30 @@ yarn install
 yarn run dev
 ```
 
+# 😫 Don't feel like it?
+
+Reach out to me on [Twitter](https://twitter.com/PaiNishant) or [Discord](nishu#4633), will deploy it for you.
+
+PS: This is a paid service.
+
+## 🧾 Have I done it before?
+
+Yes, deployed it for:
+- [Larp Island](https://larpisland.vercel.app): Took me 1 day, there were issues in metadata/codebase. Fixed all of them. [Proof] (https://etherscan.io/tx/0xe40e628eca5997f5194b371369a64c7e40a12786cb54d9037e853560bfa5a2e5)
+
+*will add testimonial*
+
+## ▶️ How does it work?
+
+0. Exchange greetings, finish payments.
+
+1. I'll request you for project related details, github creds.
+
+2. Fix the json (if any errors), ensure everything is working and update you along 
+
+3. Tell me any issues you have, can add custom fixes.
+
+4. You get the rarity score for your project, you are extremely happy and leave a tweet that tells everyone how great this service was 🍻
 
 # Stack
 
