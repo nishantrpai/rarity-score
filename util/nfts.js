@@ -217,7 +217,9 @@ export const getFilters = (traits, atr) => {
 
 export const filterNFTQuery = (nft, query) => {
   if (query) {
-    if (nft.id.toString().includes(query)) return true;
+    if (nft.name.toString().includes(query)) {
+      return true;
+    }
     return false;
   }
   return true;
