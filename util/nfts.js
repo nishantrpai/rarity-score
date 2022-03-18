@@ -228,9 +228,9 @@ export const getNFTs = (page_id, sort_by, order, traits, attr_count, query) => {
     .filter((nft) => filterNFTQuery(nft, query))
     .sort((x, y) =>
       order == "asc" ? x[sort_by] - y[sort_by] : y[sort_by] - x[sort_by]
-    );
-  // .filter((nft) => filterNFT(nft, traits))
-  // .filter((nft) => filterAttrCount(nft, attr_count));
+    )
+    .filter((nft) => filterNFT(nft, traits))
+    .filter((nft) => filterAttrCount(nft, attr_count));
   let nftdata = nftcollection.slice(page_id * 54, page_id * 54 + 54);
   let pages = Math.ceil(nftcollection.length / 54);
 
