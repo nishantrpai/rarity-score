@@ -60,9 +60,9 @@ function Home({ title, img, description, nfts, pages, filters }) {
           {showMenu}
           <TraitFilters />
           <div className="flex flex-wrap justify-between sm:justify-start max-w-5xl w-full">
-            {nfts.map((nft, idx) => (
-              <NFT {...nft} index={idx} key={idx} />
-            ))}
+            {nfts.map(
+              (nft, idx) => nft && <NFT {...nft} index={idx} key={idx} />
+            )}
           </div>
           <PageNumbers pages={pages} />
         </div>

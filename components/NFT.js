@@ -11,11 +11,11 @@ export const NFT = (nft) => {
         href={`/${nft.id}`}
       >
         <img
-          src={formatIpfsUrl(nft.image)}
-          className="rounded-md px-2 pt-2 h-auto bg-black"
+          src={formatIpfsUrl(nft.image, nft.id)}
+          className="rounded-md h-auto bg-black"
         />
         <div className="rounded-b-md py-2 px-2">
-          <h3 className="text-xs text-gray-600">#{nft.id}</h3>
+          <h3 className="text-xs text-gray-600">#{nft.id + 1}</h3>
         </div>
       </a>
     </>

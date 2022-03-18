@@ -17,11 +17,13 @@ export const getDesc = (nft) => {
 };
 
 export const formatIpfsUrl = (image_url) => {
-  const img_url = new URL(image_url);
-  if (img_url.protocol.includes("http")) {
-    return img_url;
-  } else if (img_url.protocol.includes("ipfs")) {
-    return `https://ipfs.io/ipfs/${ipfs2http(image_url)}`;
+  if (image_url) {
+    const img_url = new URL(image_url);
+    if (img_url.protocol.includes("http")) {
+      return img_url;
+    } else if (img_url.protocol.includes("ipfs")) {
+      return `https://ipfs.io/ipfs/${ipfs2http(image_url)}`;
+    }
   }
 };
 

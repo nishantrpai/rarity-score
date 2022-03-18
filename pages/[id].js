@@ -1,4 +1,4 @@
-import { formatPrice, getDesc, ipfs2http } from "../util";
+import { formatIpfsUrl, formatPrice, getDesc, ipfs2http } from "../util";
 import { FiArrowLeft } from "react-icons/fi";
 import { NextSeo } from "next-seo";
 import { getNFT, getNFTInfo } from "../util/requests";
@@ -65,10 +65,10 @@ function NFT({ nft, title }) {
           className="flex flex-col items-center justify-center 
         w-full flex-1 p-2 rounded-lg text-center mb-8 max-w-xl"
         >
-          <div className="justify-center border p-4 shadow-xl rounded-md bg-white border border-gray-300">
+          <div className="justify-center p-4 shadow-xl rounded-md bg-white">
             <h3 className="text-3xl font-semibold mb-4">{nft?.name}</h3>
-            <div className="relative rounded-md px-4 bg-black w-full">
-              <img src={img_url} />
+            <div className="relative rounded-md bg-black w-full">
+              <img className="rounded-md" src={img_url} />
               <span
                 className="absolute top-5 right-5
               text-white px-2 py-2 font-medium text-xs rounded-md bg-yellow-100 text-yellow-600"
