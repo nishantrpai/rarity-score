@@ -15,7 +15,7 @@ export const NFT = (nft) => {
           className="rounded-md h-auto bg-black"
         />
         <div className="rounded-b-md py-2 px-2">
-          <h3 className="text-xs text-gray-600">#{nft.id + 1}</h3>
+          <h3 className="text-xs text-gray-600">#{nft.id}</h3>
         </div>
       </a>
     </>
