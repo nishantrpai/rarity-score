@@ -113,7 +113,7 @@ function NFT({ nft, title }) {
 }
 
 NFT.getInitialProps = async ({ query }) => {
-  let nft = await getNFT(query.id);
+  let nft = await getNFT(query.id - 1);
   // let opensea_info = await getNFTInfo(query.id);
   // nft["opensea_link"] = opensea_info["assets"][0]["permalink"];
   nft["current_price"] = "-";
