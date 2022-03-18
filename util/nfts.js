@@ -49,7 +49,7 @@ const get_trait_rarity_score = (trait_type, all_traits) => {
 
 const set_missing_traits = (nft, missing_traits, all_traits) => {
   // How many traits don't have say Eyes, Mouth
-  let totaltraits = all_traits["type"].sum;
+  let totaltraits = nfts.length;
   nft["missing_traits"] = [];
   for (let i = 0; i < missing_traits.length; i++) {
     let missing_trait = missing_traits[i];
@@ -92,7 +92,7 @@ const set_trait_rarity = (nft, all_traits) => {
 };
 
 const set_nft_rarity = (nft, all_traits) => {
-  let sumoftraits = all_traits["type"].sum; //All types humans, aliens
+  let sumoftraits = nfts.length; //All types humans, aliens
   if (nft) {
     let { attributes } = nft;
     attributes = attributes.filter(
@@ -111,7 +111,7 @@ const calculate_attribute_rarity = (nft) => {
   attributes = attributes.filter(
     (attribute) => attribute["trait_type"] && attribute["value"]
   );
-  let sumoftraits = all_traits["type"].sum;
+  let sumoftraits = nfts.length;
   nft["trait_count"] = {
     count: attributes.length,
     percentile: attr_count[attributes.length] / sumoftraits,
@@ -157,8 +157,10 @@ export const getNFT = (id) => {
 };
 
 export const set_nft_rank = (nft, rank) => {
-  nft["rarity_rank"] = rank;
-  return { ...nft };
+  if (nft) {
+    nft["rarity_rank"] = rank;
+    return { ...nft };
+  }
 };
 
 const set_nfts_rank = () => {
@@ -230,7 +232,7 @@ export const getNFTs = (page_id, sort_by, order, traits, attr_count, query) => {
     .filter((nft) => filterNFT(nft, traits))
     .filter((nft) => filterAttrCount(nft, attr_count));
   let nftdata = nftcollection.slice(page_id * 54, page_id * 54 + 54);
-  let pages = nftcollection.length / 54;
+  let pages = Math.ceil(nftcollection.length / 54);
 
   return { nfts: nftdata, pages };
 };
