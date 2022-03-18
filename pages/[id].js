@@ -29,8 +29,7 @@ const Trait = (attribute) => {
 
 function NFT({ nft, title }) {
   const router = useRouter();
-
-  const img_url = `https://ipfs.io/ipfs/${ipfs2http(nft.image)}`;
+  const img_url = formatIpfsUrl(nft.image);
 
   return (
     <>

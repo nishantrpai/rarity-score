@@ -1,5 +1,5 @@
 import React from "react";
-import { ipfs2http } from "../util";
+import { formatIpfsUrl, ipfs2http } from "../util";
 
 export const NFT = (nft) => {
   return (
@@ -11,7 +11,7 @@ export const NFT = (nft) => {
         href={`/${nft.id}`}
       >
         <img
-          src={`https://ipfs.io/ipfs/${ipfs2http(nft.image)}`}
+          src={formatIpfsUrl(nft.image)}
           className="rounded-md px-2 pt-2 h-auto bg-black"
         />
         <div className="rounded-b-md py-2 px-2">
