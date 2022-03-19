@@ -102,6 +102,17 @@ Yes, deployed it for:
 - [Next.js](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/)
 
+# Fetching updates
+
+From time to time, I push updates if you want to update your repo with those changes:
+
+```
+git remote add upstream https://github.com/nishantrpai/rarity-score.git
+git fetch upstream
+git merge upstream/main 
+```
+That'll bring you all the latest changes from the repo.
+
 # Donate
 
 - Solana: 9dPN7gdN9cyGhjiQn5gBU9DQDBxUJafvS873BcW3mpFT
