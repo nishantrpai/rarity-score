@@ -83,7 +83,7 @@ PS: This is a paid service.
 Yes, deployed it for:
 - [Larp Island](https://larpisland.vercel.app): Took me 1 day, there were issues in metadata/codebase. Fixed all of them. [Transaction Proof](https://etherscan.io/tx/0xe40e628eca5997f5194b371369a64c7e40a12786cb54d9037e853560bfa5a2e5)
 
-*will add testimonial*
+![Larp Testimonial](https://pbs.twimg.com/media/FOMRz9iVIAQ1J_6?format=jpg&name=medium)
 
 ## ▶️ How does it work?
 
