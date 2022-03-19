@@ -83,7 +83,7 @@ PS: This is a paid service.
 Yes, deployed it for:
 - [Larp Island](https://larpisland.vercel.app): Took me 1 day, there were issues in metadata/codebase. Fixed all of them. [Transaction Proof](https://etherscan.io/tx/0xe40e628eca5997f5194b371369a64c7e40a12786cb54d9037e853560bfa5a2e5)
 
-![Larp Testimonial](https://pbs.twimg.com/media/FOMRz9iVIAQ1J_6?format=jpg&name=medium)
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Every Islander is special, but some are more special than others ... <br><br>Our custom-built open-source rarity tool is now live. Enjoy!<br><br>Hat-tip to buildooor 🛠️ <a href="https://twitter.com/PaiNishant?ref_src=twsrc%5Etfw">@PaiNishant</a> for his code and his guidance and for being a legend 👊<a href="https://t.co/7WytxK1jPH">https://t.co/7WytxK1jPH</a></p>&mdash; Larp Island 🏝 (@larpisland) <a href="https://twitter.com/larpisland/status/1504951132501643268?ref_src=twsrc%5Etfw">March 18, 2022</a></blockquote>
 
 ## ▶️ How does it work?
 
