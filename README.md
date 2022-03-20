@@ -72,7 +72,7 @@ yarn install
 yarn run dev
 ```
 
-# 😫 Don't feel like it?
+# 😫 Having issues?
 
 Reach out to me on [Twitter](https://twitter.com/PaiNishant) or [Discord](https://discordapp.com/users/nishu#4633), will deploy it for you.
 
