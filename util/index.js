@@ -1,7 +1,8 @@
+import { config } from "../config";
 export const getDesc = (nft) => {
   let desc;
   desc = `
-  🔷ID: ${nft.id}
+  🔷ID: ${config.STARTING_INDEX == 1 ? nft.id + 1 : nft.id}
   
   🔷Rarity score: ${nft.rarity_score.toFixed(2)}
   
