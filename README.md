@@ -72,11 +72,46 @@ yarn install
 yarn run dev
 ```
 
+# 😫 Having issues?
+
+Reach out to me on [Twitter](https://twitter.com/PaiNishant) or [Discord](https://discordapp.com/users/nishu#4633), will deploy it for you.
+
+PS: This is a paid service.
+
+## 🧾 Have I done it before?
+
+Yes, deployed it for:
+- [Larp Island](https://larpisland.vercel.app): Took me 1 day, there were issues in metadata/codebase. Fixed all of them. [Transaction Proof](https://etherscan.io/tx/0xe40e628eca5997f5194b371369a64c7e40a12786cb54d9037e853560bfa5a2e5)
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Every Islander is special, but some are more special than others ... <br><br>Our custom-built open-source rarity tool is now live. Enjoy!<br><br>Hat-tip to buildooor 🛠️ <a href="https://twitter.com/PaiNishant?ref_src=twsrc%5Etfw">@PaiNishant</a> for his code and his guidance and for being a legend 👊<a href="https://t.co/7WytxK1jPH">https://t.co/7WytxK1jPH</a></p>&mdash; Larp Island 🏝 (@larpisland) <a href="https://twitter.com/larpisland/status/1504951132501643268?ref_src=twsrc%5Etfw">March 18, 2022</a></blockquote>
+
+## ▶️ How does it work?
+
+0. Exchange greetings, finish payments.
+
+1. I'll request you for project related details, github creds.
+
+2. Fix the json (if any errors), ensure everything is working and update you along 
+
+3. Tell me any issues you have, can add custom fixes.
+
+4. You get the rarity score for your project, you are extremely happy and leave a tweet that tells everyone how great this service was 🍻
 
 # Stack
 
 - [Next.js](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/)
+
+# Fetching updates
+
+From time to time, I push updates if you want to update your repo with those changes:
+
+```
+git remote add upstream https://github.com/nishantrpai/rarity-score.git
+git fetch upstream
+git merge upstream/main 
+```
+That'll bring you all the latest changes from the repo.
 
 # Donate
 
