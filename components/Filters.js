@@ -27,14 +27,26 @@ export const Filters = (props) => {
                 <h2 className="text-gray-700 uppercase font-bold mb-2">
                   {filter}
                 </h2>
-                {Object.keys(allTraits[filter]).map((val) => (
-                  <a
-                    className={`bg-white cursor-pointer hover:bg-gray-300 hover:text-gray-900 rounded-md text-gray-700 py-2 px-1 flex`}
-                    onClick={() => handleChange(val)}
-                  >
-                    {val} ({allTraits[filter][val]})
-                  </a>
-                ))}
+                {Object.keys(allTraits[filter])
+                  .sort((filter1, filter2) => {
+                    console.log(
+                      filter,
+                      filter1,
+                      filter2,
+                      allTraits[filter][filter1] - allTraits[filter][filter2]
+                    );
+                    return (
+                      allTraits[filter][filter1] - allTraits[filter][filter2]
+                    );
+                  })
+                  .map((val) => (
+                    <a
+                      className={`bg-white cursor-pointer hover:bg-gray-300 hover:text-gray-900 rounded-md text-gray-700 py-2 px-1 flex`}
+                      onClick={() => handleChange(val)}
+                    >
+                      {val} ({allTraits[filter][val]})
+                    </a>
+                  ))}
               </div>
             )}
           </>
