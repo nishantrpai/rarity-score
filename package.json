@@ -4,7 +4,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
+    "test": "echo 'triggering a test script'"
   },
   "dependencies": {
     "html2canvas": "^1.3.2",
