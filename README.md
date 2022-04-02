@@ -72,6 +72,22 @@ yarn install
 yarn run dev
 ```
 
+# Stack
+
+- [Next.js](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+# Fetching updates
+
+From time to time, I push updates if you want to update your repo with those changes:
+
+```
+git remote add upstream https://github.com/nishantrpai/rarity-score.git
+git fetch upstream
+git merge upstream/main 
+```
+That'll bring you all the latest changes from the repo.
+
 # 😫 Having issues?
 
 Reach out to me on [Twitter](https://twitter.com/PaiNishant) or [Discord](https://discordapp.com/users/nishu#4633), will deploy it for you.
@@ -97,22 +113,6 @@ Yes, deployed it for:
 
 4. You get the rarity score for your project, you are extremely happy and leave a tweet that tells everyone how great this service was 🍻
 
-# Stack
-
-- [Next.js](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com/)
-
-# Fetching updates
-
-From time to time, I push updates if you want to update your repo with those changes:
-
-```
-git remote add upstream https://github.com/nishantrpai/rarity-score.git
-git fetch upstream
-git merge upstream/main 
-```
-That'll bring you all the latest changes from the repo.
-
 # Donate
 
 - Solana: 9dPN7gdN9cyGhjiQn5gBU9DQDBxUJafvS873BcW3mpFT
@@ -120,3 +120,4 @@ That'll bring you all the latest changes from the repo.
 - Ethereum: 0x5A8064F8249D079f02bfb688f4AA86B6b2C65359 
 
 - ENS for donating: nishantpai.eth
+
