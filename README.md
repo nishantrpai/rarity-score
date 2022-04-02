@@ -97,9 +97,11 @@ PS: This is a paid service.
 ## 🧾 Have I done it before?
 
 Yes, deployed it for:
-- [Larp Island](https://larpisland.vercel.app): Took me 1 day, there were issues in metadata/codebase. Fixed all of them. [Transaction Proof](https://etherscan.io/tx/0xe40e628eca5997f5194b371369a64c7e40a12786cb54d9037e853560bfa5a2e5)
-
+- [Larp Island](https://larpisland.vercel.app): 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Every Islander is special, but some are more special than others ... <br><br>Our custom-built open-source rarity tool is now live. Enjoy!<br><br>Hat-tip to buildooor 🛠️ <a href="https://twitter.com/PaiNishant?ref_src=twsrc%5Etfw">@PaiNishant</a> for his code and his guidance and for being a legend 👊<a href="https://t.co/7WytxK1jPH">https://t.co/7WytxK1jPH</a></p>&mdash; Larp Island 🏝 (@larpisland) <a href="https://twitter.com/larpisland/status/1504951132501643268?ref_src=twsrc%5Etfw">March 18, 2022</a></blockquote>
+
+- [Coffee Club NFTs](https://rarity.thecoffeeclub.io/)
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Each Coffee Club Cup is unique, just like YOU.. ☕️<br><br>A huge s/o to the one and only <a href="https://twitter.com/PaiNishant?ref_src=twsrc%5Etfw">@PaiNishant</a> for assisting me with our brand new, open-source rarity ranking tool. <br><br>You can check your Cups ranking here:<a href="https://t.co/l6gN1tbeoY">https://t.co/l6gN1tbeoY</a> <a href="https://t.co/VEA7X4nwoO">https://t.co/VEA7X4nwoO</a> <a href="https://t.co/t1yLPtu63c">pic.twitter.com/t1yLPtu63c</a></p>&mdash; Coffee Club NFTs (@CoffeeClubNFTs) <a href="https://twitter.com/CoffeeClubNFTs/status/1506071804074471425?ref_src=twsrc%5Etfw">March 22, 2022</a></blockquote>
 
 ## ▶️ How does it work?
 
