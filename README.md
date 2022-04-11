@@ -72,31 +72,6 @@ yarn install
 yarn run dev
 ```
 
-# 😫 Having issues?
-
-Reach out to me on [Twitter](https://twitter.com/PaiNishant) or [Discord](https://discordapp.com/users/nishu#4633), will deploy it for you.
-
-PS: This is a paid service.
-
-## 🧾 Have I done it before?
-
-Yes, deployed it for:
-- [Larp Island](https://larpisland.vercel.app): Took me 1 day, there were issues in metadata/codebase. Fixed all of them. [Transaction Proof](https://etherscan.io/tx/0xe40e628eca5997f5194b371369a64c7e40a12786cb54d9037e853560bfa5a2e5)
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Every Islander is special, but some are more special than others ... <br><br>Our custom-built open-source rarity tool is now live. Enjoy!<br><br>Hat-tip to buildooor 🛠️ <a href="https://twitter.com/PaiNishant?ref_src=twsrc%5Etfw">@PaiNishant</a> for his code and his guidance and for being a legend 👊<a href="https://t.co/7WytxK1jPH">https://t.co/7WytxK1jPH</a></p>&mdash; Larp Island 🏝 (@larpisland) <a href="https://twitter.com/larpisland/status/1504951132501643268?ref_src=twsrc%5Etfw">March 18, 2022</a></blockquote>
-
-## ▶️ How does it work?
-
-0. Exchange greetings, finish payments.
-
-1. I'll request you for project related details, github creds.
-
-2. Fix the json (if any errors), ensure everything is working and update you along 
-
-3. Tell me any issues you have, can add custom fixes.
-
-4. You get the rarity score for your project, you are extremely happy and leave a tweet that tells everyone how great this service was 🍻
-
 # Stack
 
 - [Next.js](https://nextjs.org/docs)
@@ -113,6 +88,33 @@ git merge upstream/main
 ```
 That'll bring you all the latest changes from the repo.
 
+# 😫 Having issues?
+
+Reach out to me on [Twitter](https://twitter.com/PaiNishant) or [Discord](https://discordapp.com/users/nishu#4633), will deploy it for you.
+
+PS: This is a paid service.
+
+## 🧾 Have I done it before?
+
+Yes, deployed it for:
+- [Larp Island](https://larpisland.vercel.app): 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Every Islander is special, but some are more special than others ... <br><br>Our custom-built open-source rarity tool is now live. Enjoy!<br><br>Hat-tip to buildooor 🛠️ <a href="https://twitter.com/PaiNishant?ref_src=twsrc%5Etfw">@PaiNishant</a> for his code and his guidance and for being a legend 👊<a href="https://t.co/7WytxK1jPH">https://t.co/7WytxK1jPH</a></p>&mdash; Larp Island 🏝 (@larpisland) <a href="https://twitter.com/larpisland/status/1504951132501643268?ref_src=twsrc%5Etfw">March 18, 2022</a></blockquote>
+
+- [Coffee Club NFTs](https://rarity.thecoffeeclub.io/)
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Each Coffee Club Cup is unique, just like YOU.. ☕️<br><br>A huge s/o to the one and only <a href="https://twitter.com/PaiNishant?ref_src=twsrc%5Etfw">@PaiNishant</a> for assisting me with our brand new, open-source rarity ranking tool. <br><br>You can check your Cups ranking here:<a href="https://t.co/l6gN1tbeoY">https://t.co/l6gN1tbeoY</a> <a href="https://t.co/VEA7X4nwoO">https://t.co/VEA7X4nwoO</a> <a href="https://t.co/t1yLPtu63c">pic.twitter.com/t1yLPtu63c</a></p>&mdash; Coffee Club NFTs (@CoffeeClubNFTs) <a href="https://twitter.com/CoffeeClubNFTs/status/1506071804074471425?ref_src=twsrc%5Etfw">March 22, 2022</a></blockquote>
+
+## ▶️ How does it work?
+
+0. Exchange greetings, finish payments.
+
+1. I'll request you for project related details, github creds.
+
+2. Fix the json (if any errors), ensure everything is working and update you along 
+
+3. Tell me any issues you have, can add custom fixes.
+
+4. You get the rarity score for your project, you are extremely happy and leave a tweet that tells everyone how great this service was 🍻
+
 # Donate
 
 - Solana: 9dPN7gdN9cyGhjiQn5gBU9DQDBxUJafvS873BcW3mpFT
@@ -120,3 +122,4 @@ That'll bring you all the latest changes from the repo.
 - Ethereum: 0x5A8064F8249D079f02bfb688f4AA86B6b2C65359 
 
 - ENS for donating: nishantpai.eth
+
