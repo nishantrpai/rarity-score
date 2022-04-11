@@ -29,12 +29,6 @@ export const Filters = (props) => {
                 </h2>
                 {Object.keys(allTraits[filter])
                   .sort((filter1, filter2) => {
-                    console.log(
-                      filter,
-                      filter1,
-                      filter2,
-                      allTraits[filter][filter1] - allTraits[filter][filter2]
-                    );
                     return (
                       allTraits[filter][filter1] - allTraits[filter][filter2]
                     );

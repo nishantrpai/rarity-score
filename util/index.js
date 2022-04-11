@@ -1,4 +1,10 @@
 import { config } from "../config";
+
+let basePath =
+  config.env == "local"
+    ? `http://${config.LOCAL_API_URL}`
+    : `https://${config.API_URL}`;
+
 export const getDesc = (nft) => {
   let desc;
   desc = `
@@ -28,7 +34,11 @@ export const ipfs2http = (ipfs_url) => {
 
 export const formatIpfsUrl = (image_url) => {
   if (image_url) {
-    const img_url = new URL(image_url);
+    const img_url = new URL(
+      image_url.includes("http") || image_url.includes("ipfs")
+        ? image_url
+        : `${basePath}${image_url}`
+    );
     if (img_url.protocol.includes("http")) {
       return img_url;
     } else if (img_url.protocol.includes("ipfs")) {
