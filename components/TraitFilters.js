@@ -27,7 +27,10 @@ export const TraitFilters = () => {
       )}
       {traits.map((trait) => (
         <div className="max-w-max	flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-indigo-700 bg-indigo-200">
-          <span className="text-xs">{trait}</span>
+          <span className="text-xs flex justify-center items-center">
+            <b>{trait.split(":")[0].toLocaleUpperCase()}</b>:{" "}
+            {trait.split(":")[1]}
+          </span>
           <span
             className="cursor-pointer"
             onClick={() => {

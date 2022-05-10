@@ -11,8 +11,8 @@ export const Filters = (props) => {
   const handleChange = (filter, trait) => {
     props.setShowMenu(false);
     traits = traits ? traits : "";
-    // traits = traits.split(",").filter((val) => val);
-    traits += `${filter}:${trait},`;
+    traits = traits.split(",").filter((val) => val);
+    traits.push(`${filter}:${trait}`);
     router.push(`?${json2query({ ...router.query, traits, page_id: 0 })}`);
   };
 
