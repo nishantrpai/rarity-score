@@ -212,7 +212,9 @@ const filterNFT = (nft, traits) => {
     for (let i = 0; i < attributes.length; i++) {
       let { trait_type, value } = attributes[i];
       for (let j = 0; j < traits.length; j++) {
-        if (trait_type == traits[j] || value == traits[j]) traits_count--;
+        let [queryTraitType, queryTraitValue] = traits[j].split(":");
+        if (trait_type == queryTraitType && value == queryTraitValue)
+          traits_count--;
       }
     }
 

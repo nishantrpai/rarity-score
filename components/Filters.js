@@ -8,16 +8,16 @@ export const Filters = (props) => {
   const { allTraits } = props;
   const filters = Object.keys(allTraits);
 
-  const handleChange = (trait) => {
+  const handleChange = (filter, trait) => {
     props.setShowMenu(false);
     traits = traits ? traits : "";
     traits = traits.split(",").filter((val) => val);
-    traits.push(trait);
+    traits.push(`${filter}:${trait}`);
     router.push(`?${json2query({ ...router.query, traits, page_id: 0 })}`);
   };
 
   return (
-    <div className="max-w-sm w-full text-xs mt-4" onChange={handleChange}>
+    <div className="max-w-sm w-full text-xs mt-4">
       {filters.map((filter, index) => {
         return (
           <>
@@ -36,7 +36,7 @@ export const Filters = (props) => {
                   .map((val) => (
                     <a
                       className={`bg-white cursor-pointer hover:bg-gray-300 hover:text-gray-900 rounded-md text-gray-700 py-2 px-1 flex`}
-                      onClick={() => handleChange(val)}
+                      onClick={() => handleChange(filter, val)}
                     >
                       {val} ({allTraits[filter][val]})
                     </a>
