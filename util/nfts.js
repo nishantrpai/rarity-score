@@ -1,5 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 let nfts = require("../data/collection.json");
+import { config } from "../config";
+const weights = config.WEIGHTS ?? {};
+
+const getWeight = (traitValue) => {
+  if (weights[traitValue]) return weights[traitValue];
+  return 1;
+};
 
 const get_all_traits = (nft_arr) => {
   let all_traits = {};
@@ -110,7 +117,8 @@ const set_nft_rarity = (nft, all_traits) => {
     for (let i = 0; i < attributes.length; i++) {
       let attribute = attributes[i];
       attribute["percentile"] = attribute["count"] / sumoftraits;
-      attribute["rarity_score"] = 1 / (attribute["count"] / sumoftraits);
+      attribute["rarity_score"] = 1 / attribute["percentile"];
+      attribute["rarity_score"] *= getWeight(attribute["value"]);
     }
   }
 };
