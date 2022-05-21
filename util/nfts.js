@@ -3,11 +3,22 @@ let nfts = require("../data/collection.json");
 import { config } from "../config";
 const weights = config.WEIGHTS ?? {};
 
-const getWeight = (traitValue) => {
-  if (weights[traitValue]) return weights[traitValue];
+/**
+ * Get trait weight from config
+ * Added for desirability
+ * @param {*} trait_value : value of trait
+ * @returns weight of trait value
+ */
+const getWeight = (trait_value) => {
+  if (weights[trait_value]) return weights[trait_value];
   return 1;
 };
 
+/**
+ * Get all traits in the collection and attribute count array
+ * @param {*} nft_arr : nft collection from collection.json
+ * @returns all traits in the collection and attribute array
+ */
 const get_all_traits = (nft_arr) => {
   let all_traits = {};
   let attr_count = {}; //track attribute count of each nft
@@ -53,10 +64,22 @@ const get_all_traits = (nft_arr) => {
 
 let { all_traits, attr_count } = get_all_traits(nfts);
 
+/**
+ * Return trait sum for trait type
+ * @param {*} trait_type : trait type (category not value)
+ * @param {*} all_traits : all traits in the collection
+ * @returns
+ */
 const get_trait_rarity_score = (trait_type, all_traits) => {
   return all_traits[trait_type].sum;
 };
 
+/**
+ * Set missing traits for each nft token
+ * @param {*} nft : token with attributes
+ * @param {*} missing_traits : traits that are not present
+ * @param {*} all_traits : all traits in the collection
+ */
 const set_missing_traits = (nft, missing_traits, all_traits) => {
   // How many traits don't have say Eyes, Mouth
   let totaltraits = nfts.length;
@@ -77,6 +100,11 @@ const set_missing_traits = (nft, missing_traits, all_traits) => {
   }
 };
 
+/**
+ * Set rarity of each trait in attributes
+ * @param {*} nft : nft json
+ * @param {*} all_traits : all traits in the collection
+ */
 const set_trait_rarity = (nft, all_traits) => {
   if (nft) {
     let { attributes } = nft;
@@ -104,7 +132,11 @@ const set_trait_rarity = (nft, all_traits) => {
   }
 };
 
-const set_nft_rarity = (nft, all_traits) => {
+/**
+ * Set rarity of NFT of present traits
+ * @param {*} nft
+ */
+const set_nft_rarity = (nft) => {
   let sumoftraits = nfts.length; //All types humans, aliens
   if (nft) {
     let { attributes } = nft;
@@ -123,6 +155,10 @@ const set_nft_rarity = (nft, all_traits) => {
   }
 };
 
+/**
+ * Calculate rarity of attribute count
+ * @param {*} nft
+ */
 const calculate_attribute_rarity = (nft) => {
   let { attributes } = nft;
   attributes = attributes.filter(
@@ -139,6 +175,12 @@ const calculate_attribute_rarity = (nft) => {
   };
 };
 
+/**
+ * Calculate rarity of NFT
+ * Stored at "rarity_score"
+ * @param {*} nft : NFT after all attributes (rarity_score etc.,) have been added
+ *
+ */
 const calculate_nft_rarity = (nft) => {
   let { attributes, missing_traits } = nft;
   attributes = attributes.filter(
@@ -158,6 +200,11 @@ const calculate_nft_rarity = (nft) => {
   nft["rarity_score"] += nft["trait_count"]["rarity_score"];
 };
 
+/**
+ * Function is responsible for filtering tokens that are not present
+ * and updating the 'attributes' param
+ * @param {*} nft : nft json
+ */
 const filter_nft_attributes = (nft) => {
   nft["attributes"] = nft["attributes"].filter(
     (attribute) =>
@@ -167,6 +214,12 @@ const filter_nft_attributes = (nft) => {
   );
 };
 
+/**
+ * Retrieve NFT for specific id
+ * Function is responsible for all computation of rarity score for token
+ * @param {*} id : token "id" from collection.json
+ * @returns nft token after all calculations
+ */
 export const getNFT = (id) => {
   // Retrieve nft for id
   // Precompute the frequency of each trait
@@ -175,13 +228,19 @@ export const getNFT = (id) => {
   if (nft) {
     filter_nft_attributes(nft);
     set_trait_rarity(nft, all_traits);
-    set_nft_rarity(nft, all_traits);
+    set_nft_rarity(nft);
     calculate_attribute_rarity(nft);
     calculate_nft_rarity(nft);
     return { ...nft };
   }
 };
 
+/**
+ * Set rarity rank based on rarity score
+ * @param {*} nft
+ * @param {*} rank
+ * @returns nft token with rarity rank
+ */
 export const set_nft_rank = (nft, rank) => {
   if (nft) {
     nft["rarity_rank"] = rank;
@@ -189,6 +248,9 @@ export const set_nft_rank = (nft, rank) => {
   }
 };
 
+/**
+ * INIT function for setting a rarity score for all tokens
+ */
 const set_nfts_rank = () => {
   nfts = nfts
     .map((nft) => getNFT(nft.id))
@@ -199,6 +261,12 @@ const set_nfts_rank = () => {
 
 set_nfts_rank();
 
+/**
+ *
+ * @param {*} nft
+ * @param {*} traits
+ * @returns
+ */
 const filterNFT = (nft, traits) => {
   if (traits.length > 0 && nft) {
     let { attributes } = nft;
@@ -224,6 +292,12 @@ const filterNFT = (nft, traits) => {
   return true;
 };
 
+/**
+ * Used for filtering nft by attribute count
+ * @param {*} nft : nft token whose attribute count is to be checked
+ * @param {*} attr_count : attribute count user has selected
+ * @returns if the nft has attributes = attr_count
+ */
 const filterAttrCount = (nft, attr_count) => {
   if (attr_count !== "") {
     if (nft.trait_count.count == attr_count) return true;
@@ -232,6 +306,29 @@ const filterAttrCount = (nft, attr_count) => {
   return true;
 };
 
+/**
+ * Used by search bar (sidebar)
+ * Filters ONLY on the basis of name
+ * @param {*} nft : NFT token is passed to the
+ * @param {*} query : query is the input the user adds in the search bar
+ * @returns true/false if name is present or not
+ */
+const filterNFTQuery = (nft, query) => {
+  if (query) {
+    if (nft.name.toString().includes(query)) {
+      return true;
+    }
+    return false;
+  }
+  return true;
+};
+
+/**
+ * Sends all attribute type and value as array (sidebar)
+ * @param {*} traits : traits user has selected
+ * @param {*} atr : attributes user has selected
+ * @returns all traits and attributes after filtering
+ */
 export const getFilters = (traits, atr) => {
   let nftcollection = nfts
     .filter((nft) => filterNFT(nft, traits))
@@ -246,16 +343,16 @@ export const getFilters = (traits, atr) => {
   return { all_traits: traits_tmp, attr_count: atr_tmp };
 };
 
-export const filterNFTQuery = (nft, query) => {
-  if (query) {
-    if (nft.name.toString().includes(query)) {
-      return true;
-    }
-    return false;
-  }
-  return true;
-};
-
+/**
+ * Filters NFT by which page, order, attr count (app)
+ * @param {*} page_id : used to page buttons at the bottom
+ * @param {*} sort_by : used by order filters in the order for which field e.g., rarity/token id
+ * @param {*} order : used by order filters in the sidebar for asc/desc
+ * @param {*} traits : used by trait filters on the sidebar for e.g., Hair
+ * @param {*} attr_count : used by trait filters
+ * @param {*} query : used by search function
+ * @returns nft collection after all filters are run
+ */
 export const getNFTs = (page_id, sort_by, order, traits, attr_count, query) => {
   let nftcollection = nfts
     .filter((nft) => filterNFTQuery(nft, query))
