@@ -15,15 +15,15 @@ const Trait = (attribute) => {
           {attribute?.trait_type.toUpperCase()}{" "}
         </span>
       </div>
-      <div className="relative flex justify-between items-center w-full text-xs text-black mt-1 py-2">
+      <div className="relative flex justify-between items-center w-full text-xs text-gray-500 mt-1 py-2">
         <span
-          className="bg-red-50 rounded-md absolute z-0 h-8"
+          className="bg-gray-50 rounded-md absolute z-0 h-8"
           style={{ width: `${(attribute.percentile * 100).toFixed(1)}%` }}
         ></span>
-        <div className="z-50 flex justify-between w-full px-1">
+        <div className="z-50 flex justify-between w-full px-2">
           <span>{attribute.value ? attribute.value : "-"} </span>
           {/* <span>{attribute.percentile} | </span> */}
-          <span className="text-red-500 font-bold z-50">
+          <span className="font-bold text-gray-500 z-50">
             {(attribute.percentile * 100).toFixed(1)}%
             {/* +{attribute.rarity_score?.toFixed(2)} */}
           </span>
