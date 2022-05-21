@@ -11,19 +11,20 @@ const Trait = (attribute) => {
   return (
     <div className="flex flex-col justify-start w-full mb-4 p-1">
       <div className="flex justify-between items-center w-full text-xs mb-2 px-1">
-        <span className="text-gray-800 font-bold">
+        <span className="text-gray-400">
           {attribute?.trait_type.toUpperCase()}{" "}
         </span>
       </div>
-      <div className="relative flex justify-between items-center w-full text-xs text-gray-500 mt-1 py-2">
+      <div className="relative flex justify-between items-center w-full text-xs text-gray-600 mt-1 py-2">
+        <span className="bg-gray-50 rounded-md absolute z-0 h-8 w-full"></span>
         <span
-          className="bg-gray-50 rounded-md absolute z-0 h-8"
+          className="bg-gray-100 rounded-l-lg absolute z-10 h-8"
           style={{ width: `${(attribute.percentile * 100).toFixed(1)}%` }}
         ></span>
         <div className="z-50 flex justify-between w-full px-2">
-          <span>{attribute.value ? attribute.value : "-"} </span>
+          <span>{attribute.value ? attribute.value : "None"} </span>
           {/* <span>{attribute.percentile} | </span> */}
-          <span className="font-bold text-gray-500 z-50">
+          <span className="font-bold z-50">
             {(attribute.percentile * 100).toFixed(1)}%
             {/* +{attribute.rarity_score?.toFixed(2)} */}
           </span>
