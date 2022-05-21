@@ -9,19 +9,25 @@ import { Footer } from "../components/Footer";
 
 const Trait = (attribute) => {
   return (
-    <div className="flex flex-col justify-start w-full mb-4 p-2">
-      <div className="flex justify-between w-full text-xs mb-2">
-        <span className="text-gray-500">
+    <div className="flex flex-col justify-start w-full mb-4 p-1">
+      <div className="flex justify-between items-center w-full text-xs mb-2 px-1">
+        <span className="text-gray-800 font-bold">
           {attribute?.trait_type.toUpperCase()}{" "}
         </span>
-        <span className="text-red-500 font-bold">
-          +{attribute.rarity_score?.toFixed(2)}
-        </span>
       </div>
-      <div className="flex justify-between w-full text-xs text-gray-700">
-        <span>{attribute.value ? attribute.value : "-"} </span>
-        {/* <span>{attribute.percentile} | </span> */}
-        <span className="font-bold">{attribute.count}</span>
+      <div className="relative flex justify-between items-center w-full text-xs text-black mt-1 py-2">
+        <span
+          className="bg-red-50 rounded-md absolute z-0 h-8"
+          style={{ width: `${(attribute.percentile * 100).toFixed(1)}%` }}
+        ></span>
+        <div className="z-50 flex justify-between w-full px-1">
+          <span>{attribute.value ? attribute.value : "-"} </span>
+          {/* <span>{attribute.percentile} | </span> */}
+          <span className="text-red-500 font-bold z-50">
+            {(attribute.percentile * 100).toFixed(1)}%
+            {/* +{attribute.rarity_score?.toFixed(2)} */}
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -4,12 +4,16 @@ import { config } from "../config";
 const weights = config.WEIGHTS ?? {};
 
 /**
+ * Main file where rarity score is calculated
+ */
+
+/**
  * Get trait weight from config
  * Added for desirability
  * @param {*} trait_value : value of trait
  * @returns weight of trait value
  */
-const getWeight = (trait_value) => {
+const get_weight = (trait_value) => {
   if (weights[trait_value]) return weights[trait_value];
   return 1;
 };
@@ -61,8 +65,6 @@ const get_all_traits = (nft_arr) => {
   }
   return { all_traits, attr_count };
 };
-
-let { all_traits, attr_count } = get_all_traits(nfts);
 
 /**
  * Return trait sum for trait type
@@ -150,7 +152,7 @@ const set_nft_rarity = (nft) => {
       let attribute = attributes[i];
       attribute["percentile"] = attribute["count"] / sumoftraits;
       attribute["rarity_score"] = 1 / attribute["percentile"];
-      attribute["rarity_score"] *= getWeight(attribute["value"]);
+      attribute["rarity_score"] *= get_weight(attribute["value"]);
     }
   }
 };
@@ -215,33 +217,12 @@ const filter_nft_attributes = (nft) => {
 };
 
 /**
- * Retrieve NFT for specific id
- * Function is responsible for all computation of rarity score for token
- * @param {*} id : token "id" from collection.json
- * @returns nft token after all calculations
- */
-export const getNFT = (id) => {
-  // Retrieve nft for id
-  // Precompute the frequency of each trait
-  nfts = nfts.sort((x, y) => x["id"] - y["id"]);
-  let nft = nfts[id];
-  if (nft) {
-    filter_nft_attributes(nft);
-    set_trait_rarity(nft, all_traits);
-    set_nft_rarity(nft);
-    calculate_attribute_rarity(nft);
-    calculate_nft_rarity(nft);
-    return { ...nft };
-  }
-};
-
-/**
  * Set rarity rank based on rarity score
  * @param {*} nft
  * @param {*} rank
  * @returns nft token with rarity rank
  */
-export const set_nft_rank = (nft, rank) => {
+const set_nft_rank = (nft, rank) => {
   if (nft) {
     nft["rarity_rank"] = rank;
     return { ...nft };
@@ -259,15 +240,13 @@ const set_nfts_rank = () => {
     .sort((x, y) => x["id"] - y["id"]);
 };
 
-set_nfts_rank();
-
 /**
  *
  * @param {*} nft
  * @param {*} traits
  * @returns
  */
-const filterNFT = (nft, traits) => {
+const filter_nft = (nft, traits) => {
   if (traits.length > 0 && nft) {
     let { attributes } = nft;
     let traits_count = traits.length;
@@ -298,7 +277,7 @@ const filterNFT = (nft, traits) => {
  * @param {*} attr_count : attribute count user has selected
  * @returns if the nft has attributes = attr_count
  */
-const filterAttrCount = (nft, attr_count) => {
+const filter_attr_count = (nft, attr_count) => {
   if (attr_count !== "") {
     if (nft.trait_count.count == attr_count) return true;
     else return false;
@@ -313,7 +292,7 @@ const filterAttrCount = (nft, attr_count) => {
  * @param {*} query : query is the input the user adds in the search bar
  * @returns true/false if name is present or not
  */
-const filterNFTQuery = (nft, query) => {
+const filter_nft_query = (nft, query) => {
   if (query) {
     if (nft.name.toString().includes(query)) {
       return true;
@@ -324,6 +303,27 @@ const filterNFTQuery = (nft, query) => {
 };
 
 /**
+ * Retrieve NFT for specific id
+ * Function is responsible for all computation of rarity score for token
+ * @param {*} id : token "id" from collection.json
+ * @returns nft token after all calculations
+ */
+export const getNFT = (id) => {
+  // Retrieve nft for id
+  // Precompute the frequency of each trait
+  nfts = nfts.sort((x, y) => x["id"] - y["id"]);
+  let nft = nfts[id];
+  if (nft) {
+    filter_nft_attributes(nft);
+    set_trait_rarity(nft, all_traits);
+    set_nft_rarity(nft);
+    calculate_attribute_rarity(nft);
+    calculate_nft_rarity(nft);
+    return { ...nft };
+  }
+};
+
+/**
  * Sends all attribute type and value as array (sidebar)
  * @param {*} traits : traits user has selected
  * @param {*} atr : attributes user has selected
@@ -331,8 +331,8 @@ const filterNFTQuery = (nft, query) => {
  */
 export const getFilters = (traits, atr) => {
   let nftcollection = nfts
-    .filter((nft) => filterNFT(nft, traits))
-    .filter((nft) => filterAttrCount(nft, atr));
+    .filter((nft) => filter_nft(nft, traits))
+    .filter((nft) => filter_attr_count(nft, atr));
 
   let { all_traits: traits_tmp, attr_count: atr_tmp } =
     get_all_traits(nftcollection);
@@ -355,14 +355,17 @@ export const getFilters = (traits, atr) => {
  */
 export const getNFTs = (page_id, sort_by, order, traits, attr_count, query) => {
   let nftcollection = nfts
-    .filter((nft) => filterNFTQuery(nft, query))
+    .filter((nft) => filter_nft_query(nft, query))
     .sort((x, y) =>
       order == "asc" ? x[sort_by] - y[sort_by] : y[sort_by] - x[sort_by]
     )
-    .filter((nft) => filterNFT(nft, traits))
-    .filter((nft) => filterAttrCount(nft, attr_count));
+    .filter((nft) => filter_nft(nft, traits))
+    .filter((nft) => filter_attr_count(nft, attr_count));
   let nftdata = nftcollection.slice(page_id * 54, page_id * 54 + 54);
   let pages = Math.ceil(nftcollection.length / 54);
 
   return { nfts: nftdata, pages };
 };
+
+let { all_traits, attr_count } = get_all_traits(nfts);
+set_nfts_rank();
