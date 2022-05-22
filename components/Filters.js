@@ -22,15 +22,16 @@ export const Filters = (props) => {
         return (
           <>
             {/* if there is one common attribute, no need to filter based on that */}
-            {Object.keys(allTraits[filter]).length > 1 && (
+            {Object.keys(allTraits[filter]["attributes"]).length > 1 && (
               <div className="w-full flex flex-col px-2 mt-4">
                 <h2 className="text-gray-700 uppercase font-bold mb-2">
                   {filter}
                 </h2>
-                {Object.keys(allTraits[filter])
+                {Object.keys(allTraits[filter]["attributes"])
                   .sort((filter1, filter2) => {
                     return (
-                      allTraits[filter][filter1] - allTraits[filter][filter2]
+                      allTraits[filter]["attributes"][filter1] -
+                      allTraits[filter]["attributes"][filter2]
                     );
                   })
                   .map((val) => (
@@ -38,7 +39,7 @@ export const Filters = (props) => {
                       className={`bg-white cursor-pointer hover:bg-gray-300 hover:text-gray-900 rounded-md text-gray-700 py-2 px-1 flex`}
                       onClick={() => handleChange(filter, val)}
                     >
-                      {val} ({allTraits[filter][val]})
+                      {val} ({allTraits[filter]["attributes"][val]})
                     </a>
                   ))}
               </div>

@@ -48,16 +48,16 @@ const get_all_traits = (nft_arr) => {
           if (all_traits[trait_type]) {
             // trait exists
             all_traits[trait_type].sum++;
-            if (all_traits[trait_type][value]) {
+            if (all_traits[trait_type]["attributes"][value]) {
               // trait exists, value exists
-              all_traits[trait_type][value]++;
+              all_traits[trait_type]["attributes"][value]++;
             } else {
               // trait exists, value doesn't
-              all_traits[trait_type][value] = 1;
+              all_traits[trait_type]["attributes"][value] = 1;
             }
           } else {
             // trait or value don't exist
-            all_traits[trait_type] = { [value]: 1, sum: 1 };
+            all_traits[trait_type] = { attributes: { [value]: 1 }, sum: 1 };
           }
         }
       }
@@ -122,7 +122,7 @@ const set_trait_rarity = (nft, all_traits) => {
       if (attribute) {
         let { trait_type, value } = attribute;
         if (trait_type && value && value !== "None") {
-          attribute["count"] = all_traits[trait_type][value];
+          attribute["count"] = all_traits[trait_type]["attributes"][value];
           // remove traits that are present
           missing_traits = missing_traits.filter(
             (trait) => trait !== trait_type
@@ -310,7 +310,7 @@ const filter_nft_query = (nft, query) => {
  */
 export const getNFT = (id) => {
   // Retrieve nft for id
-  // Precompute the frequency of each trait
+  // Precompute the frequency for each trait
   nfts = nfts.sort((x, y) => x["id"] - y["id"]);
   let nft = nfts[id];
   if (nft) {
@@ -334,13 +334,8 @@ export const getFilters = (traits, atr) => {
     .filter((nft) => filter_nft(nft, traits))
     .filter((nft) => filter_attr_count(nft, atr));
 
-  let { all_traits: traits_tmp, attr_count: atr_tmp } =
-    get_all_traits(nftcollection);
-  for (let i = 0; i < Object.keys(traits_tmp).length; i++) {
-    let key = Object.keys(traits_tmp)[i];
-    delete traits_tmp[key]["sum"];
-  }
-  return { all_traits: traits_tmp, attr_count: atr_tmp };
+  let { all_traits, attr_count } = get_all_traits(nftcollection);
+  return { all_traits, attr_count };
 };
 
 /**
