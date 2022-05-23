@@ -244,7 +244,7 @@ const set_nft_rank = (nft, rank) => {
 const set_nfts_rank = () => {
   nfts = nfts
     .map((nft) => getNFT(nft.id))
-    .sort((x, y) => y["rarity_score_normalized"] - x["rarity_score_normalized"])
+    .sort((x, y) => y["rarity_score"] - x["rarity_score"])
     .map((nft, index) => set_nft_rank(nft, index))
     .sort((x, y) => x["id"] - y["id"]);
 };
