@@ -30,8 +30,8 @@ export const Filters = (props) => {
                 {Object.keys(allTraits[filter]["attributes"])
                   .sort((filter1, filter2) => {
                     return (
-                      allTraits[filter]["attributes"][filter1] -
-                      allTraits[filter]["attributes"][filter2]
+                      allTraits[filter]["attributes"][filter1].count -
+                      allTraits[filter]["attributes"][filter2].count
                     );
                   })
                   .map((val) => (
@@ -39,7 +39,7 @@ export const Filters = (props) => {
                       className={`bg-white cursor-pointer hover:bg-gray-300 hover:text-gray-900 rounded-md text-gray-700 py-2 px-1 flex`}
                       onClick={() => handleChange(filter, val)}
                     >
-                      {val} ({allTraits[filter]["attributes"][val]})
+                      {val} ({allTraits[filter]["attributes"][val].count})
                     </a>
                   ))}
               </div>

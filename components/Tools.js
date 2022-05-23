@@ -30,6 +30,28 @@ export const Tools = (props) => {
         );
       }
     }
+    if (option.toLowerCase().includes("normalize")) {
+      if (option.includes("desc")) {
+        router.push(
+          `?${json2query({
+            ...router.query,
+            sort_by: "rarity_score_normalized",
+            order: "desc",
+            page_id: 0,
+          })}`
+        );
+      }
+      if (option.includes("asc")) {
+        router.push(
+          `?${json2query({
+            ...router.query,
+            sort_by: "rarity_score_normalized",
+            order: "asc",
+            page_id: 0,
+          })}`
+        );
+      }
+    }
 
     if (option.toLowerCase().includes("id")) {
       if (option.includes("desc")) {
@@ -73,6 +95,7 @@ export const Tools = (props) => {
           <span className="text-xs">&nbsp;&nbsp;Rarity</span>
         </a>
       )}
+
       {!(sort_by == "rarity_score" && order == "asc") && (
         <a
           className="hover:bg-gray-300 hover:text-gray-900 cursor-pointer text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
@@ -86,6 +109,33 @@ export const Tools = (props) => {
           <span className="text-xs">&nbsp;&nbsp;Rarity</span>
         </a>
       )}
+      {!(sort_by == "rarity_score_normalized" && order == "desc") && (
+        <a
+          className="hover:bg-gray-300 hover:text-gray-900  cursor-pointer text-xs text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
+          onClick={() => {
+            handleChange("normalize desc");
+          }}
+        >
+          <span c lassName="text-xs">
+            <ImSortNumbericDesc />
+          </span>
+          <span className="text-xs">&nbsp;&nbsp;Rarity (normalized)</span>
+        </a>
+      )}
+      {!(sort_by == "rarity_score" && order == "asc") && (
+        <a
+          className="hover:bg-gray-300 hover:text-gray-900 cursor-pointer text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
+          onClick={() => {
+            handleChange("normalize asc");
+          }}
+        >
+          <span className="text-xs">
+            <ImSortNumericAsc />
+          </span>
+          <span className="text-xs">&nbsp;&nbsp;Rarity (normalized)</span>
+        </a>
+      )}
+
       {!(sort_by == "id" && order == "desc") && (
         <a
           className="hover:bg-gray-300 hover:text-gray-900 cursor-pointer text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
