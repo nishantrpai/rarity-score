@@ -1,11 +1,11 @@
-import { formatIpfsUrl, formatPrice, getDesc, ipfs2http } from "../util";
+import { formatIpfsUrl, formatPrice, getDesc } from "../../util";
 import { FiArrowLeft } from "react-icons/fi";
 import { NextSeo } from "next-seo";
-import { getNFT, getNFTInfo } from "../util/requests";
+import { getNFT, getNFTInfo } from "../../util/requests";
 import { useRouter } from "next/router";
-import Navbar from "../components/Navbar";
-import { config } from "../config";
-import { Footer } from "../components/Footer";
+import Navbar from "../../components/Navbar";
+import { config } from "../../config";
+import { Footer } from "../../components/Footer";
 
 const Trait = (attribute) => {
   return (

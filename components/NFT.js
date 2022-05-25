@@ -9,7 +9,7 @@ export const NFT = (nft) => {
         className="text-left w-24
         cursor-pointer rounded-md shadow-xs
         mr-3 mb-3 sm:mr-4 hover:underline text-center"
-        href={`/${config.STARTING_INDEX == 1 ? nft.id + 1 : nft.id}`}
+        href={`/token/${config.STARTING_INDEX == 1 ? nft.id + 1 : nft.id}`}
       >
         <img
           src={formatIpfsUrl(nft.image)}
