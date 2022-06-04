@@ -72,7 +72,7 @@ function NFT({ nft, title }) {
           className="flex flex-col items-center justify-center 
         w-full flex-1 p-2 rounded-lg text-center mb-8 max-w-xl"
         >
-          <div className="justify-center p-4 shadow-xl rounded-md bg-white">
+          <div className="justify-center p-4 shadow-xl rounded-md bg-white w-full">
             <h3 className="text-3xl font-semibold mb-4">{nft?.name}</h3>
             <div className="relative rounded-md bg-black w-full">
               <img className="rounded-md" src={img_url} />
