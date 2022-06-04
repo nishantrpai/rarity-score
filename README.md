@@ -115,6 +115,9 @@ Yes, deployed it for:
 
 4. You get the rarity score for your project, you are extremely happy and leave a tweet that tells everyone how great this service was 🍻
 
+# Socials
+Follow [_rarityscore](https://twitter.com/_rarityscore) on twitter for updates.
+
 # Donate
 
 - Solana: 9dPN7gdN9cyGhjiQn5gBU9DQDBxUJafvS873BcW3mpFT
