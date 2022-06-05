@@ -13,12 +13,6 @@ export const getDesc = (nft) => {
   🔷Rarity score: ${nft.rarity_score.toFixed(2)}
   
   🔷Rarity rank: ${nft.rarity_rank + 1}
-  
-  ${
-    nft.current_price !== "-"
-      ? `🔷Price: Ξ${formatPrice(nft.current_price)}`
-      : ""
-  }
   `;
   return desc;
 };

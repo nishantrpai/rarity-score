@@ -86,19 +86,14 @@ function NFT({ nft, title }) {
             <div className="py-4 px-2 w-full rounded-md text-lg mt-4 bg-red-100 text-red-500">
               ♦️ {nft.rarity_score.toFixed(2)}
             </div>
-            {nft.current_price !== "-" && (
-              <div className="py-4 px-2 w-full rounded-md text-lg mt-4 bg-green-100 text-green-500">
-                <span>{`Ξ ${formatPrice(nft?.current_price)}`}</span>
-              </div>
-            )}
 
-            {nft?.external_url && (
+            {nft?.opensea_url && (
               <a
                 className="py-4 px-2 flex text-center w-full items-center justify-center mt-4 bg-blue-100 text-blue-500"
-                href={nft?.external_url}
+                href={nft?.opensea_url}
                 target="_blank"
               >
-                🛒 Visit gallery
+                🛒 Opensea
               </a>
             )}
             <div className="py-4 flex flex-col items-start justify-start">
@@ -120,13 +115,13 @@ function NFT({ nft, title }) {
 }
 
 NFT.getInitialProps = async ({ query }) => {
-  let nft = await getNFT(config.STARTING_INDEX == 1 ? query.id - 1 : query.id);
-  // let opensea_info = await getNFTInfo(query.id);
-  // nft["opensea_link"] = opensea_info["assets"][0]["permalink"];
-  nft["current_price"] = "-";
-  // if (opensea_info["assets"][0]["sell_orders"])
-  //   nft["current_price"] =
-  //     opensea_info["assets"][0]["sell_orders"][0]["current_price"]; //last price
+  let id = config.STARTING_INDEX == 1 ? query.id - 1 : query.id;
+  let nft = await getNFT(id);
+  if (Object.keys(config.CONTRACT).length > 0)
+    nft["opensea_url"] =
+      config.CONTRACT.CHAIN !== "solana"
+        ? `https://opensea.io/assets/${config.CONTRACT.CHAIN}/${config.CONTRACT.ADDRESS}/${id}`
+        : "";
   if (nft) return { nft, title: config.COLLECTION_TITLE };
   else return { nft: {}, title: config.COLLECTION_TITLE };
 };
