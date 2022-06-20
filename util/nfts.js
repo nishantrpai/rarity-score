@@ -2,7 +2,6 @@
 let nfts = require("../data/collection.json");
 import { config } from "../config";
 const weights = config.WEIGHTS ?? {};
-
 /**
  * Main file where rarity score is calculated
  */
@@ -419,7 +418,7 @@ export const getNFT = (id) => {
   // Retrieve nft for id
   // Precompute the frequency for each trait
   nfts = nfts.sort((x, y) => x["id"] - y["id"]);
-  let nft = nfts[id];
+  let nft = nfts.filter((nft) => nft.id == id)[0];
   if (nft) {
     filter_nft_attributes(nft);
     set_trait_rarity(nft, all_traits);
