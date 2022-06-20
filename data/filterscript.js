@@ -1,11 +1,13 @@
 const collection = require("./collection.json");
+const fs = require("fs");
 /**
  * script for running any filters on collection
  */
 
-for (let i = 0; i < collection.length; i++) {
-  for (let j = 0; j < collection[i]["attributes"].length; j++) {
-    let attribute = collection[i]["attributes"][j];
-    console.log(attribute);
-  }
-}
+collection.map((val, i) => (collection[i]["id"] = i + 1));
+
+console.log(collection[0]);
+
+fs.writeFile("collection.json", JSON.stringify(collection), () => {
+  console.log("done");
+});
