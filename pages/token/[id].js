@@ -115,7 +115,7 @@ function NFT({ nft, title }) {
 }
 
 NFT.getInitialProps = async ({ query }) => {
-  let id = config.STARTING_INDEX == 1 ? query.id - 1 : query.id;
+  let id = query.id;
   let nft = await getNFT(id);
   if (Object.keys(config.CONTRACT).length > 0)
     nft["opensea_url"] =
