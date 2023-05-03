@@ -1,5 +1,5 @@
 export const config = {
-  env: "local",
+  env: "prod",
   LOCAL_API_URL: "localhost:3000",
   API_URL: "gnome-rarity-score.vercel.app",
   COLLECTION_NAME: "Sui Gnomes",
