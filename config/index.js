@@ -12,10 +12,10 @@ export const config = {
   // ADDRESS: "0x5537d90a4a2dc9d9b37bab49b490cf67d4c54e91", //note: for solana these values change, so currently not supported
   // },
   WEIGHTS: {
-    "Crystal sparkle": 4000,
-    "King's cloak": 5500,
-    "King's crown": 5500,
-    Princess: 2050,
-    "Princess' tiara": 2050,
+    "Crystal sparkle": 15000,
+    "King's cloak": 3000,
+    "King's crown": 3000,
+    Princess: 1000,
+    "Princess' tiara": 1000,
   },
 };
