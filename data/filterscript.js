@@ -5,7 +5,7 @@ const fs = require("fs");
  */
 
 for (let i = 0; i < collection.length; i++) {
-  collection[i]["id"] = i + 1;
+  collection[i]["image"] = `/images/${i + 1}.png`;
   // for (let j = 0; j < collection[i]["attributes"].length; j++) {
   //   let attribute = collection[i]["attributes"][j];
   //   console.log(attribute);
