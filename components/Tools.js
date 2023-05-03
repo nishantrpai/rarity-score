@@ -109,7 +109,7 @@ export const Tools = (props) => {
           <span className="text-xs">&nbsp;&nbsp;Rarity</span>
         </a>
       )}
-      {!(sort_by == "rarity_score_normalized" && order == "desc") && (
+      {/* {!(sort_by == "rarity_score_normalized" && order == "desc") && (
         <a
           className="hover:bg-gray-300 hover:text-gray-900  cursor-pointer text-xs text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
           onClick={() => {
@@ -121,7 +121,7 @@ export const Tools = (props) => {
           </span>
           <span className="text-xs">&nbsp;&nbsp;Rarity (normalized)</span>
         </a>
-      )}
+      )} */}
       {!(sort_by == "rarity_score" && order == "asc") && (
         <a
           className="hover:bg-gray-300 hover:text-gray-900 cursor-pointer text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
