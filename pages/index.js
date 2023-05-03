@@ -67,7 +67,7 @@ function Home({ title, img, description, nfts, pages, filters }) {
           <PageNumbers pages={pages} />
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

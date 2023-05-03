@@ -108,7 +108,7 @@ function NFT({ nft, title }) {
             </div>
           </div>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

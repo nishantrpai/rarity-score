@@ -11,5 +11,11 @@ export const config = {
   // CHAIN: "ethereum", //possible values of ethereum, matic (polygin), klatyn, solana
   // ADDRESS: "0x5537d90a4a2dc9d9b37bab49b490cf67d4c54e91", //note: for solana these values change, so currently not supported
   // },
-  WEIGHTS: {},
+  WEIGHTS: {
+    "Crystal sparkle": 4000,
+    "King's cloak": 5500,
+    "King's crown": 5500,
+    Princess: 2050,
+    "Princess' tiara": 2050,
+  },
 };
