@@ -17,5 +17,7 @@ export const config = {
     "King's crown": 30,
     Princess: 10,
     "Princess' tiara": 10,
+    "Girl Lightning": 7,
+    "Rich girl hat": 7,
   },
 };
