@@ -123,10 +123,6 @@ Yes, deployed it for:
 
 Follow [\_rarityscore](https://twitter.com/_rarityscore) on twitter for updates.
 
-# Dev Notes
-
-Node version: 18.17.0
-
 # Donate
 
 - Solana: 9dPN7gdN9cyGhjiQn5gBU9DQDBxUJafvS873BcW3mpFT
