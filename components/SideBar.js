@@ -18,7 +18,7 @@ export const SideBar = (props) => {
       <Search {...router.query} setShowMenu={setShowMenu} />
       <Tools {...router.query} setShowMenu={setShowMenu} />
       <Filters allTraits={all_traits} setShowMenu={setShowMenu} />
-      {/* <AttrFilter attrCount={attr_count} setShowMenu={setShowMenu} /> */}
+      <AttrFilter attrCount={attr_count} setShowMenu={setShowMenu} />
     </div>
   );
 };
